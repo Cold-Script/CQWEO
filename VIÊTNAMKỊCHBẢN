@@ -656,8 +656,8 @@ end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
     Tab2:Toggle("Không Có Hiệu Ứng Bóng Tối","Makes it so you can see further in dark rooms.",true,function(Bool)
         NoDark = Bool
-        if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsLight") then
-            local Color = not NoDark and Room:GetAttribute("IsLight") and Color3.new() or Color3.fromRGB(67, 51, 56)
+        if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsDark") then
+            local Color = not NoDark and Room:GetAttribute("IsDark") and Color3.new() or Color3.fromRGB(67, 51, 56)
             Lighting.Ambient = Color
         end
     end)

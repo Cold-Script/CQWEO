@@ -294,7 +294,7 @@ local function ApplySettings(Object)
         if Object.Name == "Painting_Small" then
             local RNG = math.random(1,19)
             if RNG == 18 then
-                ReplacePainting(Object,AvatarIcon,"You")
+                ReplacePainting(Object,AvatarIcon,"IT'S YOU")
             elseif RNG == 19 then
                 ReplacePainting(Object,"rbxassetid://12380697948","Mr. Hong")
             end
@@ -336,13 +336,13 @@ local function ApplySettings(Object)
                 end)
             end
         end
-        if Object.Name == "Mắt" then
+        if Object.Name == "Eyes" then
             EyesOnMap = true
             if DisableEyes then
                 MotorReplication:FireServer(0,-120,0,false)
             end
         end
-        if Object.Name == "bẫy" then
+        if Object.Name == "Eyes" then
             Object.Hitbox.CanTouch = not DisableSnare
         end
     end)
@@ -399,7 +399,7 @@ LocalPlayer.CharacterAdded:Connect(function(NewCharacter)
 end)
 workspace.DescendantAdded:Connect(ApplySettings)
 workspace.ChildRemoved:Connect(function(Object)
-    if Object.Name == "Mắt" then
+    if Object.Name == "Eyes" then
         if not workspace:FindFirstChild("Mắt") then
             EyesOnMap = false
         end
@@ -482,9 +482,9 @@ Tab:Toggle("Bật tương tác","Sets the Enabled property of all Proximity Prom
         end
     end
 end)
-Tab:Toggle("Không gây trừ máu bởi mắt","Makes the game (and other players) think you are looking down whenever eyes spawns.",false,function(Bool)
+Tab:Toggle("Không gây trừ máu bởi eyes","Makes the game (and other players) think you are looking down whenever eyes spawns.",false,function(Bool)
     DisableEyes = Bool
-    if workspace:FindFirstChild("Mắt") then
+    if workspace:FindFirstChild("eyes") then
         MotorReplication:FireServer(0,DisableEyes and -120 or 0,0,false)
     end
 end)

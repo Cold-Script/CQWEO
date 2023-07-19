@@ -58,9 +58,9 @@ local A90Module
 local CustomA90Module
 local DoorRange
 local SpoofMotor
-local ESP_Items = {KeyObtain={"Chìa Khoá",1.5},LiveHintBook={"Sách",1.5},Lighter={"Bật Lửa",1.5},Lockpick={"Đồ Mở Khoá",1.5},Vitamins={"Thuốc Chạy",1.5},Crucifix={"Thánh Giá",1.5},CrucifixWall={"Thánh Giá",1.5},SkeletonKey={"Chìa Khoá Xương",1.5},Flashlight={"Đèn Pin",1.5},Candle={"Nến",1.5},LiveBreakerPolePickup={"Fuse",1.5},Shears={"Kéo",1.5},Battery={"Pin",1.5},PickupItem={"Giấy",1.5},ElectricalKeyObtain={"Chìa Khoá Điện",1.5},Shakelight={"Đèn Pin Lắc",1.5},Scanner={"iPad",1.5}}
-local ESP_Entities = {RushMoving={"Vội Vã",5},AmbushMoving={"Phục Kích",5},FigureRagdoll={"Hình",7},FigureLibrary={"Hình",7},SeekMoving={"Tìm Kiếm",5.5},Screech={"Kêu Lên",2},Eyes={"Mắt",4},Snare={"Gai",2},A60={"A-60",10},A120={"A-120",10}}
-local ESP_Other = {Door={"Cửa",5},LeverForGate={"Cằn Gạt",3},GoldPile={"Vàng",0.5},Bandage={"Băng Cá Nhân",0.5}}
+local ESP_Items = {KeyObtain={"Key",1.5},LiveHintBook={"Books",1.5},Lighter={"Lighter",1.5},Lockpick={"lockpick",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Shears={"Shears",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shake light",1.5},Scanner={"iPad",1.5}}
+local ESP_Entities = {RushMoving={"Rush",5},AmbushMoving={"Ambush",5},FigureRagdoll={"Figure",7},FigureLibrary={"Figure",7},SeekMoving={"Seek",5.5},Screech={"Screech",2},Eyes={"Eyes",4},Snare={"Snare",2},A60={"A-60",10},A120={"A-120",10}}
+local ESP_Other = {Door={"Door",5},LeverForGate={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}}
 local MainFrame = MainUI.MainFrame
 local GameData = ReplicatedStorage.GameData
 local LatestRoom = GameData.LatestRoom

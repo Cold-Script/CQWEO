@@ -17,7 +17,7 @@ local AvatarIcon = Players:GetUserThumbnailAsync(LocalPlayer.UserId,Enum.Thumbna
 local MainUI = LocalPlayer.PlayerGui.MainUI
 local Main_Game = MainUI.Initiator.Main_Game
 local Modules = Main_Game.RemoteListener.Modules
-local SpeedBoost = 6
+local SpeedBoost = 8
 local ScreechSafeRooms = {}
 local PrimaryPart = Character.PrimaryPart
 local CurrentRooms = workspace.CurrentRooms
@@ -219,7 +219,7 @@ local function ApplySettings(Object)
                             TXT = "Cửa " .. (Floor.Value == "Phòng" and "A-" or "") .. tonumber(Object.Parent.Name) + 1 .. RoomName
                         end
                         if IsValid[1] == "Vàng" then
-                            TXT = Object:GetAttribute("GoldValue") .. " Vàng"
+                            TXT = Object:GetAttribute("Giá trị vàng") .. " Vàng"
                         end
                         local UI = Instance.new("BillboardGui",Object)
                         UI.Size = UDim2.new(0,1000,0,30)
@@ -427,7 +427,7 @@ EntityInfo.A90.OnClientEvent:Connect(function()
         end)
     end
 end)
-Tab:Toggle("Closet Exit Fix ","Fixes the bug where you can't exit a closet right after entering it",false,function(Bool)
+Tab:Toggle("Không Thoát Fix","Fixes the bug where you can't exit a closet right after entering it",false,function(Bool)
     ClosetExitFix = Bool
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
@@ -456,7 +456,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         end
     end)
 end
-Tab:Toggle("Enable All Interactions","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",false,function(Bool)
+Tab:Toggle("Cho Phép Lấy Vật Phẩm Từ Xa","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",false,function(Bool)
     EnableInteractions = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -515,7 +515,7 @@ Tab:Toggle("Xoá Giữ","Removes having to hold down the button for a long perio
         end
     end
 end)
-Tab:Toggle("Interact Through Objects","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
+Tab:Toggle("Giao Tiếp Từ Xa","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
     InteractNoclip = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -544,7 +544,7 @@ Tab:Slider("Tốc Độ","Boosts your speed.",0,6,0,function(speed)
     ApplySpeed(true)
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab:Button("Unlock Library Padlock","Instantly inputs the Padlock code for Room 50. Can guess up to 3 digits. Requires 1 Player to have the hint paper.",function()
+    Tab:Button("Nhấn Giải Mã Của Thư Viện [Đủ 5 Cuốn Sách]","Instantly inputs the Padlock code for Room 50. Can guess up to 3 digits. Requires 1 Player to have the hint paper.",function()
         local Paper = workspace:FindFirstChild("LibraryHintPaper",true) or workspace:FindFirstChild("LibraryHintPaperHard",true) or Players:FindFirstChild("LibraryHintPaper",true) or Players:FindFirstChild("LibraryHintPaperHard",true)
         if not Paper then
             Flux:Notification("Someone needs to have the Hint Paper to use this.","OK")
@@ -609,7 +609,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         end
     end)
 end
-Tab:Toggle("Orther","Repeatedly uses everyone else's items like Vitamins, The Lighter, and The Flashlight.",false,function(Bool)
+Tab:Toggle("Esp Vật Phẩm Ngẫu Nhiên","Repeatedly uses everyone else's items like Vitamins, The Lighter, and The Flashlight.",false,function(Bool)
     WasteItems = Bool
     while task.wait(1) do
         if not WasteItems then
@@ -633,7 +633,7 @@ Tab:Toggle("Orther","Repeatedly uses everyone else's items like Vitamins, The Li
     end
 end)
 if Floor.Value == "Phòng" then
-    Tab2:Toggle("Disable A-90","Disables A-90 visual, sound, and damage.",false,function(Bool)
+    Tab2:Toggle("Xoá A90","Disables A-90 visual, sound, and damage.",false,function(Bool)
         DisableA90 = Bool
     end)
 end
@@ -654,7 +654,7 @@ Tab2:Toggle("Esp Vật Phẩm","Highlights items like Keys, Books, and Crucifixe
     end
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("No Darkness Effect","Makes it so you can see further in dark rooms.",false,function(Bool)
+    Tab2:Toggle("Không Có Hiệu Ứng Bóng Tối","Makes it so you can see further in dark rooms.",false,function(Bool)
         NoDark = Bool
         if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsDark") then
             local Color = not NoDark and Room:GetAttribute("IsDark") and Color3.new() or Color3.fromRGB(67, 51, 56)
@@ -681,7 +681,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         DisableTimothy = Bool
     end)
 end
-Tab2:Toggle("Spam Motor Replication","Other players will basically see you having a seizure.",false,function(Bool)
+Tab2:Toggle("SAO CHÉP CÁC THƯ RÁC","Other players will basically see you having a seizure.",false,function(Bool)
     if Bool then
         SpoofMotor = game:GetService("RunService").Heartbeat:Connect(function()
             MotorReplication:FireServer(math.random(1,100000),math.random(1,100000),math.random(1,100000),false)
@@ -691,7 +691,7 @@ Tab2:Toggle("Spam Motor Replication","Other players will basically see you havin
     end
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("Unbreakable Lights","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",false,function(Bool)
+    Tab2:Toggle("Không Bể Đèn [GIẢM LAG]","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",false,function(Bool)
         if Bool then
             Module_Events.shatter = function(Room)
                 table.insert(ScreechSafeRooms, tostring(Room))

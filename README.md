@@ -2,8 +2,8 @@ if game.CoreGui:FindFirstChild("FluxLib") or game.CoreGui:FindFirstChild("Messag
 
 local Flux = loadstring(game:HttpGet("https://lolcat.boo/assets/flux-fixed"))()
 local Window = Flux:Window("COOL HUB  ", "Doors", Color3.new(0,0.8), Enum.KeyCode.RightControl)
-local Tab = Window:Tab("Main", "rbxassetid://6026568198")
-local Tab2 = Window:Tab("Visual", "rbxassetid://6031763426")
+local Tab = Window:Tab("Hỗ Trợ", "rbxassetid://6026568198")
+local Tab2 = Window:Tab("Cài Đặt", "rbxassetid://6031763426")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -32,7 +32,7 @@ local EntityESP = true
 local OtherESP = true
 local EyesOnMap = true
 local InstantInteract = true
-local IncreasedDistance = trư
+local IncreasedDistance = true
 local InteractNoclip = true
 local EnableInteractions = true
 local DisableDupe = true

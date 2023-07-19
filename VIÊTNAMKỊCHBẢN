@@ -17,7 +17,7 @@ local AvatarIcon = Players:GetUserThumbnailAsync(LocalPlayer.UserId,Enum.Thumbna
 local MainUI = LocalPlayer.PlayerGui.MainUI
 local Main_Game = MainUI.Initiator.Main_Game
 local Modules = Main_Game.RemoteListener.Modules
-local SpeedBoost = 8
+local SpeedBoost = 6
 local ScreechSafeRooms = {}
 local PrimaryPart = Character.PrimaryPart
 local CurrentRooms = workspace.CurrentRooms
@@ -427,11 +427,11 @@ EntityInfo.A90.OnClientEvent:Connect(function()
         end)
     end
 end)
-Tab:Toggle("Không Thoát Fix","Fixes the bug where you can't exit a closet right after entering it",false,function(Bool)
+Tab:Toggle("Không Thoát Fix","Fixes the bug where you can't exit a closet right after entering it",true,function(Bool)
     ClosetExitFix = Bool
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab:Toggle("Xoá bịp bợm","Makes it so you can't open duped doors",false,function(Bool)
+    Tab:Toggle("Xoá bịp bợm","Makes it so you can't open duped doors",true,function(Bool)
         DisableDupe = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "DoorFake" then
@@ -439,7 +439,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
             end
         end
     end)
-    Tab:Toggle("Xoá Khung Cảnh Tìm Kiếm","Makes it so you can't trigger Seek to spawn. Other players still can.",false,function(Bool)
+    Tab:Toggle("Xoá Khung Cảnh Tìm Kiếm","Makes it so you can't trigger Seek to spawn. Other players still can.",true,function(Bool)
         DisableSeek = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "Collision" then
@@ -447,7 +447,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
             end
         end
     end)
-    Tab:Toggle("Xoá Gai","Makes it so you won't get stunned or take damage from Snare when stepping on it.",false,function(Bool)
+    Tab:Toggle("Xoá Gai","Makes it so you won't get stunned or take damage from Snare when stepping on it.",true,function(Bool)
         DisableSnare = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "Snare" then
@@ -456,7 +456,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         end
     end)
 end
-Tab:Toggle("Cho Phép Lấy Vật Phẩm Từ Xa","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",false,function(Bool)
+Tab:Toggle("Cho Phép Lấy Vật Phẩm Từ Xa","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",true,function(Bool)
     EnableInteractions = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -482,13 +482,13 @@ Tab:Toggle("Cho Phép Lấy Vật Phẩm Từ Xa","Sets the Enabled property of 
         end
     end
 end)
-Tab:Toggle("Không Mắt Máu Bởi Mắt","Makes the game (and other players) think you are looking down whenever eyes spawns.",false,function(Bool)
+Tab:Toggle("Không Mắt Máu Bởi Mắt","Makes the game (and other players) think you are looking down whenever eyes spawns.",true,function(Bool)
     DisableEyes = Bool
     if workspace:FindFirstChild("Mắt") then
         MotorReplication:FireServer(0,DisableEyes and -120 or 0,0,false)
     end
 end)
-Tab:Toggle("Mở Cửa Xa","Makes it so you can open doors from much further away.",false,function(Bool)
+Tab:Toggle("Mở Cửa Xa","Makes it so you can open doors from much further away.",true,function(Bool)
     if Bool then
         DoorRange = RunService.Heartbeat:Connect(function()
             if not workspace:FindFirstChild("A120") then
@@ -499,7 +499,7 @@ Tab:Toggle("Mở Cửa Xa","Makes it so you can open doors from much further awa
         DoorRange:Disconnect()
     end
 end)
-Tab:Toggle("Nhấn Từ Xa","Doubles the Max Activation Distance for Proximity Prompts.",false,function(Bool)
+Tab:Toggle("Nhấn Từ Xa","Doubles the Max Activation Distance for Proximity Prompts.",true,function(Bool)
     IncreasedDistance = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -507,7 +507,7 @@ Tab:Toggle("Nhấn Từ Xa","Doubles the Max Activation Distance for Proximity P
         end
     end
 end)
-Tab:Toggle("Xoá Giữ","Removes having to hold down the button for a long period of time on Proximity Prompts.",false,function(Bool)
+Tab:Toggle("Xoá Giữ","Removes having to hold down the button for a long period of time on Proximity Prompts.",true,function(Bool)
     InstantInteract = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -515,7 +515,7 @@ Tab:Toggle("Xoá Giữ","Removes having to hold down the button for a long perio
         end
     end
 end)
-Tab:Toggle("Giao Tiếp Từ Xa","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
+Tab:Toggle("Giao Tiếp Từ Xa","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",true,function(Bool)
     InteractNoclip = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -523,7 +523,7 @@ Tab:Toggle("Giao Tiếp Từ Xa","Lets you interact with Proximity Prompts throu
         end
     end
 end)
-Tab:Toggle("Không Mảnh Khối Điện","Tricks the game into thinking you completed the breaker puzzle at Room 100. May take up to 10 seconds to work.",false,function(Bool)
+Tab:Toggle("Tự Động Giải Điện","Tricks the game into thinking you completed the breaker puzzle at Room 100. May take up to 10 seconds to work.",true,function(Bool)
     NoBreaker = Bool
     while task.wait(1) do
         if not NoBreaker then
@@ -532,7 +532,7 @@ Tab:Toggle("Không Mảnh Khối Điện","Tricks the game into thinking you com
         EntityInfo.EBF:FireServer()
     end
 end)
-Tab:Toggle("Đi Xuyên Tường","Lets you walk through any object. Does not work on Doors.",false,function(Bool)
+Tab:Toggle("Đi Xuyên Tường","Lets you walk through any object. Does not work on Doors.",true,function(Bool)
     Noclip = Bool
     if Character:FindFirstChild("Collision") then
         Character.Collision.CanCollide = not Noclip
@@ -633,11 +633,11 @@ Tab:Toggle("Esp Vật Phẩm Ngẫu Nhiên","Repeatedly uses everyone else's ite
     end
 end)
 if Floor.Value == "Phòng" then
-    Tab2:Toggle("Xoá A90","Disables A-90 visual, sound, and damage.",false,function(Bool)
+    Tab2:Toggle("Xoá A90","Disables A-90 visual, sound, and damage.",true,function(Bool)
         DisableA90 = Bool
     end)
 end
-Tab2:Toggle("Esp Thực Thể","Highlights all hostile entities.",false,function(Bool)
+Tab2:Toggle("Esp Thực Thể","Highlights all hostile entities.",true,function(Bool)
     EntityESP = Bool
     for _,Object in pairs(workspace:GetDescendants()) do
         if ESP_Entities[Object.Name] then
@@ -645,7 +645,7 @@ Tab2:Toggle("Esp Thực Thể","Highlights all hostile entities.",false,function
         end
     end
 end)
-Tab2:Toggle("Esp Vật Phẩm","Highlights items like Keys, Books, and Crucifixes through walls.",false,function(Bool)
+Tab2:Toggle("Esp Vật Phẩm","Highlights items like Keys, Books, and Crucifixes through walls.",true,function(Bool)
     ItemESP = Bool
     for _,Object in pairs(workspace:GetDescendants()) do
         if ESP_Items[Object.Name] then
@@ -654,15 +654,15 @@ Tab2:Toggle("Esp Vật Phẩm","Highlights items like Keys, Books, and Crucifixe
     end
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("Không Có Hiệu Ứng Bóng Tối","Makes it so you can see further in dark rooms.",false,function(Bool)
+    Tab2:Toggle("Không Có Hiệu Ứng Bóng Tối","Makes it so you can see further in dark rooms.",true,function(Bool)
         NoDark = Bool
-        if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsDark") then
-            local Color = not NoDark and Room:GetAttribute("IsDark") and Color3.new() or Color3.fromRGB(67, 51, 56)
+        if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsLight") then
+            local Color = not NoDark and Room:GetAttribute("IsLight") and Color3.new() or Color3.fromRGB(67, 51, 56)
             Lighting.Ambient = Color
         end
     end)
 end
-Tab2:Toggle("Esp Cửa Sách Khối Điện","Highlights all hostile entities.",false,function(Bool)
+Tab2:Toggle("Esp Cửa Sách Khối Điện Người Chơi","Highlights all hostile entities.",true,function(Bool)
     OtherESP = Bool
     for _,Object in pairs(workspace:GetDescendants()) do
         if ESP_Other[Object.Name] then
@@ -670,18 +670,18 @@ Tab2:Toggle("Esp Cửa Sách Khối Điện","Highlights all hostile entities.",
         end
     end
 end)
-Tab2:Toggle("Xoá Giải Thích Cách Chết","Completely skips the Guiding/Curious light messages that appear after you die.",false,function(Bool)
+Tab2:Toggle("Xoá Giải Thích Cách Chết","Completely skips the Guiding/Curious light messages that appear after you die.",true,function(Bool)
     RemoveDeathHint = Bool
 end)
-Tab2:Toggle("Xoá Lỗi Thù","Removes the Glitch visual and sound. Will still teleport you.",false,function(Bool)
+Tab2:Toggle("Xoá Lỗi Thù","Removes the Glitch visual and sound. Will still teleport you.",true,function(Bool)
     DisableGlitch = Bool
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("Nhện Không Thù","Removes the Timothy visual and sound. Will still deal damage.",false,function(Bool)
+    Tab2:Toggle("Nhện Không Thù","Removes the Timothy visual and sound. Will still deal damage.",true,function(Bool)
         DisableTimothy = Bool
     end)
 end
-Tab2:Toggle("SAO CHÉP CÁC THƯ RÁC","Other players will basically see you having a seizure.",false,function(Bool)
+Tab2:Toggle("SAO CHÉP CÁC THƯ RÁC","Other players will basically see you having a seizure.",true,function(Bool)
     if Bool then
         SpoofMotor = game:GetService("RunService").Heartbeat:Connect(function()
             MotorReplication:FireServer(math.random(1,100000),math.random(1,100000),math.random(1,100000),false)
@@ -691,7 +691,7 @@ Tab2:Toggle("SAO CHÉP CÁC THƯ RÁC","Other players will basically see you hav
     end
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("Không Bể Đèn [GIẢM LAG]","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",false,function(Bool)
+    Tab2:Toggle("Không Bể Đèn [GIẢM LAG]","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",true,function(Bool)
         if Bool then
             Module_Events.shatter = function(Room)
                 table.insert(ScreechSafeRooms, tostring(Room))

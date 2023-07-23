@@ -1,7 +1,7 @@
 if game.CoreGui:FindFirstChild("FluxLib") or game.CoreGui:FindFirstChild("Message") then return end
 
 local Flux = loadstring(game:HttpGet("https://lolcat.boo/assets/flux-fixed"))()
-local Window = Flux:Window("Tuyệt Vời", "Create By Rechedmcvn", Color3.new(7,9.9), Enum.KeyCode.RightControl)
+local Window = Flux:Window("You Hub", "Create By Rechedmcvn", Color3.new(7,9.9), Enum.KeyCode.RightControl)
 local Tab = Window:Tab("Hỗ Trợ", "rbxassetid://6026568198")
 local Tab2 = Window:Tab("Cài Đăt", "rbxassetid://6031763426")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -122,7 +122,7 @@ local function ReplacePainting(Painting,NewImage,NewTitle)
     Painting:WaitForChild("Canvas").SurfaceGui.ImageLabel.Image = NewImage
     Painting.Canvas.SurfaceGui.ImageLabel.BackgroundTransparency = 1
     Painting.Canvas.SurfaceGui.ImageLabel.ImageTransparency = 0
-    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(1,1,1)
+    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(99,999,99)
     local NewPrompt = Painting:WaitForChild("InteractPrompt"):Clone()
     Painting.InteractPrompt:Destroy()
     NewPrompt.Parent = Painting

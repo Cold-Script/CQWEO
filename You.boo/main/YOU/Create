@@ -110,7 +110,7 @@ end)
 DeathHint.OnClientEvent:Connect(function()
     if RemoveDeathHint then
         task.wait()
-        firesignal(DeathHint.OnClientEvent,{},"Blue")
+        firesignal(DeathHint.OnClientEvent,{},"Yellow")
     end
 end)
 for _,Player in pairs(Players:GetPlayers()) do
@@ -122,7 +122,7 @@ local function ReplacePainting(Painting,NewImage,NewTitle)
     Painting:WaitForChild("Canvas").SurfaceGui.ImageLabel.Image = NewImage
     Painting.Canvas.SurfaceGui.ImageLabel.BackgroundTransparency = 1
     Painting.Canvas.SurfaceGui.ImageLabel.ImageTransparency = 0
-    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(99,999,99)
+    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(0,0,9)
     local NewPrompt = Painting:WaitForChild("InteractPrompt"):Clone()
     Painting.InteractPrompt:Destroy()
     NewPrompt.Parent = Painting

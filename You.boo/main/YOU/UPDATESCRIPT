@@ -954,19 +954,6 @@ while true do
                     hl.OutlineTransparency = 1
                     hl.FillTransparency = 0.25
                     hl.FillColor = Color3.new(1, 0, 0)
-                end
-            end
-        end
-        if game.Workspace.CurrentRooms["50"]:FindFirstChild("Assets") then
-            for i, o in pairs(game.Workspace.CurrentRooms["50"].Assets:GetChildren()) do
-                if o.Name == "Super Cool Bookshelf With Hint Book" and o:FindFirstChild("LiveHintBook") then
-                    if not o.LiveHintBook:FindFirstChild("HighlightA") then
-                        local hl = Instance.new("Highlight")
-                        hl.Name = "HighlightA"
-                        hl.Parent = o.LiveHintBook
-                        hl.OutlineTransparency = 1
-                        hl.FillTransparency = 0.25
-                        hl.FillColor = Color3.new(0, 0, 1)
                     end
                 end
             end

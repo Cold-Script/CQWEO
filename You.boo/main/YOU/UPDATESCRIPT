@@ -777,13 +777,6 @@ text2.BackgroundColor3 = Color3.new(1, 1, 1)
 text2.Size = UDim2.new(0, 100, 0, 100)
 text2.Position = UDim2.new(0, 0, 0, 100)
 text2.Parent = game.Players.LocalPlayer.PlayerGui.TestGui
-text3.Name = "SeekDistanceThingy"
-text3.Text = "No Seek"
-text3.TextScaled = true
-text3.BackgroundColor3 = Color3.new(1, 1, 1)
-text3.Size = UDim2.new(0, 100, 0, 100)
-text3.Position = UDim2.new(0, 0, 0, 200)
-text3.Parent = game.Players.LocalPlayer.PlayerGui.TestGui
 while true do
     for i, o in pairs(game.Workspace:GetChildren()) do
         if o:FindFirstChild("Humanoid") and o.Name ~= game.Players.LocalPlayer.Name then
@@ -1008,28 +1001,6 @@ while true do
     else
         text2.Text = "No Ambush"
         text2.BackgroundColor3 = Color3.new(1, 1, 1)
-    end
-    if game.Workspace:FindFirstChild("SeekMoving") then
-        if game.Workspace.SeekMoving:FindFirstChild("SeekRig") then
-            if game.Workspace.SeekMoving.SeekRig:FindFirstChild("SeekPuddle") then
-                game.Workspace.SeekMoving.SeekRig.SeekPuddle:Destroy()
-            end
-            if not game.Workspace.SeekMoving.SeekRig:FindFirstChild("HighlightA") then
-                local hl = Instance.new("Highlight")
-                hl.Name = "HighlightA"
-                hl.Parent = game.Workspace.SeekMoving.SeekRig
-                hl.OutlineTransparency = 1
-                hl.FillTransparency = 0.25
-                hl.FillColor = Color3.new(1, 0, 0)
-            end
-            local seek = game.Workspace.SeekMoving.SeekRig.UpperTorso.Position
-            local me = game.Workspace[playerName].HumanoidRootPart.Position
-            text3.Text = "Seek: " .. math.round((me - seek).Magnitude * 10) / 10
-            text3.BackgroundColor3 = Color3.new(1, 0, 0)
-        end
-    else
-        text3.Text = "No Seek"
-        text3.BackgroundColor3 = Color3.new(1, 1, 1)
     end
     if game.Workspace.CurrentRooms:FindFirstChild("50") then
         if game.Workspace.CurrentRooms["50"]:FindFirstChild("FigureSetup") then

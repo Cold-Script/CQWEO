@@ -110,7 +110,7 @@ end)
 DeathHint.OnClientEvent:Connect(function()
     if RemoveDeathHint then
         task.wait()
-        firesignal(DeathHint.OnClientEvent,{},"Yellow")
+        firesignal(DeathHint.OnClientEvent,{},"Blue")
     end
 end)
 for _,Player in pairs(Players:GetPlayers()) do
@@ -193,9 +193,9 @@ local function ApplySettings(Object)
                 if IsValid then
                     if Bool then
                         local TXT = IsValid[1]
-                        if IsValid[1] == "Cửa" then
+                        if IsValid[1] == "Door " then
                             local RoomName
-                            if Floor.Value == "Phòng" then
+                            if Floor.Value == "Room " then
                                 RoomName = ""
                             else
                                 workspace.CurrentRooms:WaitForChild(tonumber(Object.Parent.Name) + 1,math.huge)
@@ -216,10 +216,10 @@ local function ApplySettings(Object)
                                 end
                                 RoomName = " (" .. NewString .. ")"
                             end
-                            TXT = "Cửa " .. (Floor.Value == "Phòng" and "A-" or "") .. tonumber(Object.Parent.Name) + 1 .. RoomName
+                            TXT = "Door" .. (Floor.Value == "Room" and "A-" or "") .. tonumber(Object.Parent.Name) + 1 .. RoomName
                         end
-                        if IsValid[1] == "Vàng" then
-                            TXT = Object:GetAttribute("GoldValue") .. " Vàng"
+                        if IsValid[1] == "Gold" then
+                            TXT = Object:GetAttribute("GoldValue") .. " Gold"
                         end
                         local UI = Instance.new("BillboardGui",Object)
                         UI.Size = UDim2.new(0,1000,0,30)
@@ -238,7 +238,7 @@ local function ApplySettings(Object)
                         Object.BillboardGui:Destroy()
                     end
                     local Target = Object
-                    if IsValid[1] == "Cửa" and Object.Parent.Name ~= "49" and Object.Parent.Name ~= "50" then
+                    if IsValid[1] == "Door" and Object.Parent.Name ~= "Door" and Object.Parent.Name ~= "50" then
                         Target = Object:WaitForChild("Cửa")
                     end
                     if Bool then

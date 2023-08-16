@@ -12,26 +12,6 @@ local text3 = Instance.new("TextLabel")
 local gui = Instance.new("ScreenGui")
 gui.Name = "TestGui"
 gui.Parent = game.Players.LocalPlayer.PlayerGui
-text1.Name = "RushDetectThingy"
-text1.Text = "No Rush"
-text1.TextScaled = true
-text1.BackgroundColor3 = Color3.new(1, 1, 1)
-text1.Size = UDim2.new(0, 100, 0, 100)
-text1.Parent = game.Players.LocalPlayer.PlayerGui.TestGui
-text2.Name = "AmbushDetectThingy"
-text2.Text = "No Ambush"
-text2.TextScaled = true
-text2.BackgroundColor3 = Color3.new(1, 1, 1)
-text2.Size = UDim2.new(0, 100, 0, 100)
-text2.Position = UDim2.new(0, 0, 0, 100)
-text2.Parent = game.Players.LocalPlayer.PlayerGui.TestGui
-text3.Name = "SeekDistanceThingy"
-text3.Text = "No Seek"
-text3.TextScaled = true
-text3.BackgroundColor3 = Color3.new(1, 1, 1)
-text3.Size = UDim2.new(0, 100, 0, 100)
-text3.Position = UDim2.new(0, 0, 0, 200)
-text3.Parent = game.Players.LocalPlayer.PlayerGui.TestGui
 while true do
     for i, o in pairs(game.Workspace:GetChildren()) do
         if o:FindFirstChild("Humanoid") and o.Name ~= game.Players.LocalPlayer.Name then
@@ -132,28 +112,6 @@ while true do
                     end
                 end
             end
-            for i2, o2 in pairs(o.Assets:GetChildren()) do
-                if o2:FindFirstChild("GoldPile") then
-                    if o2.GoldPile:FindFirstChild("Hitbox") then
-                        if not o2.GoldPile.Hitbox:FindFirstChild("DisplayObjectGui") then
-                            local dug = Instance.new("BillboardGui")
-                            dug.Name = "DisplayObjectGui"
-                            dug.AlwaysOnTop = true
-                            dug.Parent = o2.GoldPile.Hitbox
-                            dug.Size = UDim2.new(0, 50, 0, 50)
-                            local ug = Instance.new("TextLabel")
-                            ug.Parent = dug
-                            ug.Size = UDim2.new(0, 50, 0, 50)
-                            ug.TextScaled = true
-                            ug.Text = "Gold"
-                            ug.BorderSizePixel = 0
-                            ug.BackgroundTransparency = 1
-                            ug.TextStrokeColor3 = Color3.new(0, 0, 0)
-                            ug.TextStrokeTransparency = 0
-                            ug.TextColor3 = Color3.new(1, 1, 0)
-                        end
-                    end
-                end
                 for i3, o3 in pairs(o2:GetChildren()) do
                     if o3:FindFirstChild("KeyObtain") then
                         if o3.KeyObtain:FindFirstChild("Hitbox") then

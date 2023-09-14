@@ -1,9 +1,9 @@
 if game.CoreGui:FindFirstChild("FluxLib") or game.CoreGui:FindFirstChild("Message") then return end
 
 local Flux = loadstring(game:HttpGet("https://lolcat.boo/assets/flux-fixed"))()
-local Window = Flux:Window("Voidz Hub", "Doors", Color3.new(10,4.9), Enum.KeyCode.RightControl)
-local Tab = Window:Tab("Hỗ Trợ", "rbxassetid://6026568198")
-local Tab2 = Window:Tab("Cài Đăt", "rbxassetid://6031763426")
+local Window = Flux:Window("awesome script  ", "Doors", Color3.new(0,0.8), Enum.KeyCode.RightControl)
+local Tab = Window:Tab("Main", "rbxassetid://6026568198")
+local Tab2 = Window:Tab("Visual", "rbxassetid://6031763426")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -17,7 +17,7 @@ local AvatarIcon = Players:GetUserThumbnailAsync(LocalPlayer.UserId,Enum.Thumbna
 local MainUI = LocalPlayer.PlayerGui.MainUI
 local Main_Game = MainUI.Initiator.Main_Game
 local Modules = Main_Game.RemoteListener.Modules
-local SpeedBoost = 5
+local SpeedBoost = 0
 local ScreechSafeRooms = {}
 local PrimaryPart = Character.PrimaryPart
 local CurrentRooms = workspace.CurrentRooms
@@ -122,7 +122,7 @@ local function ReplacePainting(Painting,NewImage,NewTitle)
     Painting:WaitForChild("Canvas").SurfaceGui.ImageLabel.Image = NewImage
     Painting.Canvas.SurfaceGui.ImageLabel.BackgroundTransparency = 1
     Painting.Canvas.SurfaceGui.ImageLabel.ImageTransparency = 0
-    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(99282822828,929828282282828282828,83838383838383939393933939)
+    Painting.Canvas.SurfaceGui.ImageLabel.ImageColor3 = Color3.new(1,1,1)
     local NewPrompt = Painting:WaitForChild("InteractPrompt"):Clone()
     Painting.InteractPrompt:Destroy()
     NewPrompt.Parent = Painting
@@ -176,7 +176,7 @@ local function ApplySettings(Object)
             if Object:FindFirstChild("RushNew") then
                 if not Object.RushNew:WaitForChild("PlaySound").Playing then return end
             end
-            local Color = ESP_Items[Object.Name] and Color3.new(1119283,988272,091811) or ESP_Entities[Object.Name] and Color3.new(1) or Color3.new(0,1,1)
+            local Color = ESP_Items[Object.Name] and Color3.new(1,1) or ESP_Entities[Object.Name] and Color3.new(1) or Color3.new(0,1,1)
             if Object.Name == "RushMoving" or Object.Name == "AmbushMoving" or Object.Name == "Eyes" or Object.Name == "A60" or Object.Name == "A120" then
                 for i = 1, 100 do
                     if Object:FindFirstChildOfClass("Part") then
@@ -193,9 +193,9 @@ local function ApplySettings(Object)
                 if IsValid then
                     if Bool then
                         local TXT = IsValid[1]
-                        if IsValid[1] == "Door " then
+                        if IsValid[1] == "Door" then
                             local RoomName
-                            if Floor.Value == "Room " then
+                            if Floor.Value == "Rooms" then
                                 RoomName = ""
                             else
                                 workspace.CurrentRooms:WaitForChild(tonumber(Object.Parent.Name) + 1,math.huge)
@@ -216,7 +216,7 @@ local function ApplySettings(Object)
                                 end
                                 RoomName = " (" .. NewString .. ")"
                             end
-                            TXT = "Door" .. (Floor.Value == "Room" and "A-" or "") .. tonumber(Object.Parent.Name) + 1 .. RoomName
+                            TXT = "Door " .. (Floor.Value == "Rooms" and "A-" or "") .. tonumber(Object.Parent.Name) + 1 .. RoomName
                         end
                         if IsValid[1] == "Gold" then
                             TXT = Object:GetAttribute("GoldValue") .. " Gold"
@@ -238,8 +238,8 @@ local function ApplySettings(Object)
                         Object.BillboardGui:Destroy()
                     end
                     local Target = Object
-                    if IsValid[1] == "Door" and Object.Parent.Name ~= "Door" and Object.Parent.Name ~= "50" then
-                        Target = Object:WaitForChild("Cửa")
+                    if IsValid[1] == "Door" and Object.Parent.Name ~= "49" and Object.Parent.Name ~= "50" then
+                        Target = Object:WaitForChild("Door")
                     end
                     if Bool then
                         local Highlight = Instance.new("Highlight",Target)
@@ -294,7 +294,7 @@ local function ApplySettings(Object)
         if Object.Name == "Painting_Small" then
             local RNG = math.random(1,19)
             if RNG == 18 then
-                ReplacePainting(Object,AvatarIcon,"IT'S YOU")
+                ReplacePainting(Object,AvatarIcon,"You")
             elseif RNG == 19 then
                 ReplacePainting(Object,"rbxassetid://12380697948","Mr. Hong")
             end
@@ -311,7 +311,7 @@ local function ApplySettings(Object)
                 ReplacePainting(Object,"rbxassetid://12836336900","Kevin")
             end
         end
-        if Object.Name == "Kéo" and Object.Parent.Name == "LootItem" then
+        if Object.Name == "Shears" and Object.Parent.Name == "LootItem" then
             if not Object:FindFirstChild("FakeShears") then
                 local FakePrompt = Object.ModulePrompt:Clone()
                 Object.ModulePrompt.Enabled = false
@@ -330,7 +330,7 @@ local function ApplySettings(Object)
                         fireproximityprompt(Object.ModulePrompt)
                         Character.PrimaryPart.Velocity = Vector3.new()
                         task.wait()
-                    until Character:FindFirstChild("Kéo")
+                    until Character:FindFirstChild("Shears")
                     Character:PivotTo(PrimaryPart.CFrame + Vector3.new(0,7,0))
                     Noclip = NoclipOn
                 end)
@@ -342,7 +342,7 @@ local function ApplySettings(Object)
                 MotorReplication:FireServer(0,-120,0,false)
             end
         end
-        if Object.Name == "Eyes" then
+        if Object.Name == "Snare" then
             Object.Hitbox.CanTouch = not DisableSnare
         end
     end)
@@ -400,7 +400,7 @@ end)
 workspace.DescendantAdded:Connect(ApplySettings)
 workspace.ChildRemoved:Connect(function(Object)
     if Object.Name == "Eyes" then
-        if not workspace:FindFirstChild("Mắt") then
+        if not workspace:FindFirstChild("Eyes") then
             EyesOnMap = false
         end
     end
@@ -427,8 +427,11 @@ EntityInfo.A90.OnClientEvent:Connect(function()
         end)
     end
 end)
+Tab:Toggle("Closet Exit Fix","Fixes the bug where you can't exit a closet right after entering it",false,function(Bool)
+    ClosetExitFix = Bool
+end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab:Toggle("ANTI DUPES","Makes it so you can't open duped doors",false,function(Bool)
+    Tab:Toggle("Disable Dupe Doors","Makes it so you can't open duped doors",false,function(Bool)
         DisableDupe = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "DoorFake" then
@@ -436,7 +439,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
             end
         end
     end)
-    Tab:Toggle("REVOME A THE SEARCH'S CHASE","Makes it so you can't trigger Seek to spawn. Other players still can.",false,function(Bool)
+    Tab:Toggle("Disable Seek Trigger","Makes it so you can't trigger Seek to spawn. Other players still can.",false,function(Bool)
         DisableSeek = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "Collision" then
@@ -444,7 +447,7 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
             end
         end
     end)
-    Tab:Toggle("REMOVE SNARES","Makes it so you won't get stunned or take damage from Snare when stepping on it.",false,function(Bool)
+    Tab:Toggle("Disable Snare","Makes it so you won't get stunned or take damage from Snare when stepping on it.",false,function(Bool)
         DisableSnare = Bool
         for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
             if Object.Name == "Snare" then
@@ -453,7 +456,39 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         end
     end)
 end
-Tab:Toggle("RANGE DOORS","Makes it so you can open doors from much further away.",false,function(Bool)
+Tab:Toggle("Enable All Interactions","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",false,function(Bool)
+    EnableInteractions = Bool
+    for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
+        if Object:IsA("ProximityPrompt") then
+            if EnableInteractions and Object.Enabled then
+                table.insert(OldEnabled,Object)
+            end
+            Object.Enabled = EnableInteractions
+            if not EnableInteractions then
+                if table.find(OldEnabled, Object) then
+                    Object.Enabled = true
+                end
+            end
+            Object:GetPropertyChangedSignal("Enabled"):Connect(function()
+                if EnableInteractions then
+                    Object.Enabled = true
+                end
+            end)
+        end
+    end
+    if not EnableInteractions then
+        for index in pairs(OldEnabled) do
+            table.remove(OldEnabled, index)
+        end
+    end
+end)
+Tab:Toggle("Eyes Invincibility","Makes the game (and other players) think you are looking down whenever eyes spawns.",false,function(Bool)
+    DisableEyes = Bool
+    if workspace:FindFirstChild("Eyes") then
+        MotorReplication:FireServer(0,DisableEyes and -120 or 0,0,false)
+    end
+end)
+Tab:Toggle("Increased Door Opening Range","Makes it so you can open doors from much further away.",false,function(Bool)
     if Bool then
         DoorRange = RunService.Heartbeat:Connect(function()
             if not workspace:FindFirstChild("A120") then
@@ -464,7 +499,7 @@ Tab:Toggle("RANGE DOORS","Makes it so you can open doors from much further away.
         DoorRange:Disconnect()
     end
 end)
-Tab:Toggle("PRESS REMATE","Doubles the Max Activation Distance for Proximity Prompts.",false,function(Bool)
+Tab:Toggle("Increased Interaction Range","Doubles the Max Activation Distance for Proximity Prompts.",false,function(Bool)
     IncreasedDistance = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -472,7 +507,7 @@ Tab:Toggle("PRESS REMATE","Doubles the Max Activation Distance for Proximity Pro
         end
     end
 end)
-Tab:Toggle("REMOVE MULTIPLE HOLD","Removes having to hold down the button for a long period of time on Proximity Prompts.",false,function(Bool)
+Tab:Toggle("Instant Interact","Removes having to hold down the button for a long period of time on Proximity Prompts.",false,function(Bool)
     InstantInteract = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -480,7 +515,7 @@ Tab:Toggle("REMOVE MULTIPLE HOLD","Removes having to hold down the button for a 
         end
     end
 end)
-Tab:Toggle("LOOT ITEM IS BOOKS FROM FAR AWAY","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
+Tab:Toggle("Interact Through Objects","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
     InteractNoclip = Bool
     for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
         if Object:IsA("ProximityPrompt") then
@@ -488,7 +523,7 @@ Tab:Toggle("LOOT ITEM IS BOOKS FROM FAR AWAY","Lets you interact with Proximity 
         end
     end
 end)
-Tab:Toggle("AUTO COMPLETE 100 [DOORS]","Tricks the game into thinking you completed the breaker puzzle at Room 100. May take up to 10 seconds to work.",false,function(Bool)
+Tab:Toggle("No Breaker Puzzle","Tricks the game into thinking you completed the breaker puzzle at Room 100. May take up to 10 seconds to work.",false,function(Bool)
     NoBreaker = Bool
     while task.wait(1) do
         if not NoBreaker then
@@ -497,19 +532,120 @@ Tab:Toggle("AUTO COMPLETE 100 [DOORS]","Tricks the game into thinking you comple
         EntityInfo.EBF:FireServer()
     end
 end)
-Tab:Toggle("NOCLIP","Lets you walk through any object. Does not work on Doors.",false,function(Bool)
+Tab:Toggle("Noclip","Lets you walk through any object. Does not work on Doors.",false,function(Bool)
     Noclip = Bool
     if Character:FindFirstChild("Collision") then
         Character.Collision.CanCollide = not Noclip
     end
     PrimaryPart.CanCollide = not Noclip
 end)
-if Floor.Value == "Phòng" then
-    Tab2:Toggle("REMOVE A-90","Disables A-90 visual, sound, and damage.",false,function(Bool)
+Tab:Slider("Speed Boost","Boosts your speed.",0,6,0,function(speed)
+    SpeedBoost = speed
+    ApplySpeed(true)
+end)
+if Floor.Value == "Hotel" or Floor.Value == "Fools" then
+    Tab:Button("Unlock Library Padlock","Instantly inputs the Padlock code for Room 50. Can guess up to 3 digits. Requires 1 Player to have the hint paper.",function()
+        local Paper = workspace:FindFirstChild("LibraryHintPaper",true) or workspace:FindFirstChild("LibraryHintPaperHard",true) or Players:FindFirstChild("LibraryHintPaper",true) or Players:FindFirstChild("LibraryHintPaperHard",true)
+        if not Paper then
+            Flux:Notification("Someone needs to have the Hint Paper to use this.","OK")
+            return
+        end
+        local HintsNeeded = Floor.Value == "Fools" and 8 or 3
+        local Hints = 0
+        for _,Collected in pairs(LocalPlayer.PlayerGui.PermUI.Hints:GetChildren()) do
+            if Collected.Name == "Icon" then
+                if Collected:IsA("ImageLabel") then
+                    for _,Icon in pairs(Paper.UI:GetChildren()) do
+                        if tonumber(Icon.Name) then
+                            if Icon.ImageRectOffset == Collected.ImageRectOffset then
+                                Hints += 1
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        if Hints < HintsNeeded then
+            Flux:Notification("You need to collect at least " .. HintsNeeded - Hints .. " more correct hint" .. (Hints ~= 2 and "s" or "") .. " to use this.","OK")
+            return
+        end
+        local t = {}
+        for i = 1, Floor.Value == "Hotel" and 5 or 10 do
+            local Icon = Paper.UI[i]
+            local Number = -1
+            for _,Collected in pairs(LocalPlayer.PlayerGui.PermUI.Hints:GetChildren()) do
+                if Collected.Name == "Icon" then
+                    if Collected.ImageRectOffset == Icon.ImageRectOffset then
+                        Number = tonumber(Collected.TextLabel.Text)
+                    end
+                end
+            end
+            table.insert(t,Number)
+        end
+        for one=0,t[1]==-1 and 9 or 0 do
+            for two=0,t[2]==-1 and 9 or 0 do
+                for three=0,t[3]==-1 and 9 or 0 do
+                    for four=0,t[4]==-1 and 9 or 0 do
+                        for five=0,t[5]==-1 and 9 or 0 do
+                            if Floor.Value == "Fools" then
+                                for six=0,t[6]==-1 and 9 or 0 do
+                                    for seven=0,t[7]==-1 and 9 or 0 do
+                                        for eight=0,t[8]==-1 and 9 or 0 do
+                                            for nine=0,t[9]==-1 and 9 or 0 do
+                                                for ten=0,t[10]==-1 and 9 or 0 do
+                                                    EntityInfo.PL:FireServer((t[1]==-1 and one or t[1])..(t[2]==-1 and two or t[2])..(t[3]==-1 and three or t[3])..(t[4]==-1 and four or t[4])..(t[5]==-1 and five or t[5])..(t[6]==-1 and six or t[6])..(t[7]==-1 and seven or t[7])..(t[8]==-1 and eight or t[8])..(t[9]==-1 and nine or t[9])..(t[10]==-1 and ten or t[10]))
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            else
+                                EntityInfo.PL:FireServer((t[1]==-1 and one or t[1])..(t[2]==-1 and two or t[2])..(t[3]==-1 and three or t[3])..(t[4]==-1 and four or t[4])..(t[5]==-1 and five or t[5]))
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end
+Tab:Toggle("Waste Other Players Items","Repeatedly uses everyone else's items like Vitamins, The Lighter, and The Flashlight.",false,function(Bool)
+    WasteItems = Bool
+    while task.wait(1) do
+        if not WasteItems then
+            break
+        end
+        for _,Player in pairs(Players:GetPlayers()) do
+            local function WasteItem(Item)
+                if Item.Parent ~= Character and Item.Parent.Parent ~= LocalPlayer then
+                    if ((Item.Name == "Lighter" or Item.Name == "Flashlight") and Item:GetAttribute("Enabled") == false) or Item.Name == "Vitamins" then
+                        Item.Remote:FireServer()
+                    end
+                end
+            end
+            for _,Item in pairs(Player.Backpack:GetChildren()) do
+                WasteItem(Item)
+            end
+            for _,Item in pairs(Player.Character:GetChildren()) do
+                WasteItem(Item)
+            end
+        end
+    end
+end)
+if Floor.Value == "Rooms" then
+    Tab2:Toggle("Disable A-90","Disables A-90 visual, sound, and damage.",false,function(Bool)
         DisableA90 = Bool
     end)
 end
-Tab2:Toggle("Esp Vật Phẩm","Highlights items like Crucifixes through walls.",false,function(Bool)
+Tab2:Toggle("Entity ESP","Highlights all hostile entities.",false,function(Bool)
+    EntityESP = Bool
+    for _,Object in pairs(workspace:GetDescendants()) do
+        if ESP_Entities[Object.Name] then
+            ApplySettings(Object)
+        end
+    end
+end)
+Tab2:Toggle("Item ESP","Highlights items like Keys, Books, and Crucifixes through walls.",false,function(Bool)
     ItemESP = Bool
     for _,Object in pairs(workspace:GetDescendants()) do
         if ESP_Items[Object.Name] then
@@ -518,19 +654,44 @@ Tab2:Toggle("Esp Vật Phẩm","Highlights items like Crucifixes through walls."
     end
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-Tab2:Toggle("REMOVE MESSEGES","Completely skips the Guiding/Curious light messages that appear after you die.",false,function(Bool)
+    Tab2:Toggle("No Darkness Effect","Makes it so you can see further in dark rooms.",false,function(Bool)
+        NoDark = Bool
+        if CurrentRooms[LocalPlayer:GetAttribute("CurrentRoom")]:GetAttribute("IsDark") then
+            local Color = not NoDark and Room:GetAttribute("IsDark") and Color3.new() or Color3.fromRGB(67, 51, 56)
+            Lighting.Ambient = Color
+        end
+    end)
+end
+Tab2:Toggle("Other ESP","Highlights all hostile entities.",false,function(Bool)
+    OtherESP = Bool
+    for _,Object in pairs(workspace:GetDescendants()) do
+        if ESP_Other[Object.Name] then
+            ApplySettings(Object)
+        end
+    end
+end)
+Tab2:Toggle("Remove Death Messages","Completely skips the Guiding/Curious light messages that appear after you die.",false,function(Bool)
     RemoveDeathHint = Bool
 end)
-Tab2:Toggle("GLITCH NO JUMPCARE","Removes the Glitch visual and sound. Will still teleport you.",false,function(Bool)
+Tab2:Toggle("Remove Glitch Jumpscare","Removes the Glitch visual and sound. Will still teleport you.",false,function(Bool)
     DisableGlitch = Bool
 end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("TIMOTHY NO JUMPCARE","Removes the Timothy visual and sound. Will still deal damage.",false,function(Bool)
+    Tab2:Toggle("Remove Timothy Jumpscare","Removes the Timothy visual and sound. Will still deal damage.",false,function(Bool)
         DisableTimothy = Bool
     end)
 end
+Tab2:Toggle("Spam Motor Replication","Other players will basically see you having a seizure.",false,function(Bool)
+    if Bool then
+        SpoofMotor = game:GetService("RunService").Heartbeat:Connect(function()
+            MotorReplication:FireServer(math.random(1,100000),math.random(1,100000),math.random(1,100000),false)
+        end)
+    else
+        SpoofMotor:Disconnect()
+    end
+end)
 if Floor.Value == "Hotel" or Floor.Value == "Fools" then
-    Tab2:Toggle("NO LIGHT OFF","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",false,function(Bool)
+    Tab2:Toggle("Unbreakable Lights","Makes it so entities like Rush and Ambush won't shatter/break the lights (which makes the room dark)",false,function(Bool)
         if Bool then
             Module_Events.shatter = function(Room)
                 table.insert(ScreechSafeRooms, tostring(Room))
@@ -589,108 +750,3 @@ mt.__namecall = newcclosure(function(remote,...)
     return old_mt(remote,table.unpack(args))
 end)
 setreadonly(mt,true)
-game.Lighting.GlobalShadows = false
-game.Lighting.OutdoorAmbient = Color3.new(1, 1, 1)
-local faces = {"Front", "Back", "Bottom", "Left", "Right", "Top"}
-local text1 = Instance.new("TextLabel")
-local text2 = Instance.new("TextLabel")
-local gui = Instance.new("ScreenGui")
-local playerName = game.Players.LocalPlayer.Name
-gui.Name = "TestGui"
-gui.Parent = game.Players[playerName].PlayerGui
-text1.Name = "A60DetectThingy"
-text1.Text = "No A60"
-text1.TextScaled = true
-text1.BackgroundColor3 = Color3.new(1, 1, 1)
-text1.Size = UDim2.new(0, 100, 0, 100)
-text1.Parent = game.Players[playerName].PlayerGui.TestGui
-text2.Name = "A120DetectThingy"
-text2.Text = "No A120"
-text2.TextScaled = true
-text2.BackgroundColor3 = Color3.new(1, 1, 1)
-text2.Size = UDim2.new(0, 100, 0, 100)
-text2.Position = UDim2.new(0, 0, 0, 100)
-text2.Parent = game.Players[playerName].PlayerGui.TestGui
-while wait() do
-    for i, o in pairs(game.Workspace:GetChildren()) do
-        if o:FindFirstChild("Humanoid") and o.Name ~= game.Players.LocalPlayer.Name then
-            if not o:FindFirstChild("HighlightA") then
-                local hl = Instance.new("Highlight")
-                hl.Name = "HighlightA"
-                hl.Parent = o
-                hl.OutlineTransparency = 1
-                hl.FillTransparency = 0.25
-                hl.FillColor = Color3.new(0, 1, 0)
-            end
-        end
-        if o:FindFirstChild("HumanoidRootPart") and o.Name ~= playerName then
-            if not o.HumanoidRootPart:FindFirstChild("DisplayUserGui") then
-                local dug = Instance.new("BillboardGui")
-                dug.Name = "DisplayUserGui"
-                dug.AlwaysOnTop = true
-                dug.Parent = o.HumanoidRootPart
-                dug.Size = UDim2.new(0, 100, 0, 100)
-                local ug = Instance.new("TextLabel")
-                ug.Parent = dug
-                ug.Size = UDim2.new(0, 100, 0, 100)
-                ug.TextScaled = true
-                ug.Text = o.Name
-                ug.BorderSizePixel = 0
-                ug.BackgroundTransparency = 1
-                ug.TextStrokeColor3 = Color3.new(0, 0, 0)
-                ug.TextStrokeTransparency = 0
-                ug.TextColor3 = Color3.new(0, 1, 0)
-            end
-        end
-    end
-    if game.Workspace:FindFirstChild("A60") then
-        if game.Workspace.A60:FindFirstChild("Main") then
-            local a60 = game.Workspace.A60.Main.Position
-            local me = game.Workspace[playerName].HumanoidRootPart.Position
-            local dist = math.sqrt(math.pow(me.X - a60.X, 2) + math.pow(me.Z - a60.Z, 2))
-            text1.Text = "A60: " .. math.round(dist * 10) / 10
-            text1.BackgroundColor3 = Color3.new(1, 0, 0)
-            if not game.Workspace.A60.Main:FindFirstChild("SurfaceGui") then
-                for a = 1, 6 do
-                    local surface = Instance.new("SurfaceGui")
-                    surface.Parent = game.Workspace.A60.Main
-                    surface.AlwaysOnTop = true
-                    surface.Face = Enum.NormalId[faces[a]]
-                    local frame = Instance.new("Frame", surface)
-                    frame.Size = UDim2.new(1, 0, 1, 0)
-                    frame.BorderSizePixel = 0
-                    frame.BackgroundTransparency = 0.5
-                    frame.BackgroundColor3 = Color3.new(1, 0, 0)
-                end
-            end
-        end
-    else
-        text1.Text = "No A60"
-        text1.BackgroundColor3 = Color3.new(1, 1, 1)
-    end
-    if game.Workspace:FindFirstChild("A120") then
-        if game.Workspace.A120:FindFirstChild("Main") then
-            local a120 = game.Workspace.A120.Main.Position
-            local me = game.Workspace[playerName].HumanoidRootPart.Position
-            local dist = math.sqrt(math.pow(me.X - a120.X, 2) + math.pow(me.Z - a120.Z, 2))
-            text2.Text = "A120: " .. math.round(dist * 10) / 10
-            text2.BackgroundColor3 = Color3.new(1, 0, 0)
-            if not game.Workspace.A120.Main:FindFirstChild("SurfaceGui") then
-                for a = 1, 6 do
-                    local surface = Instance.new("SurfaceGui")
-                    surface.Parent = game.Workspace.A120.Main
-                    surface.AlwaysOnTop = true
-                    surface.Face = Enum.NormalId[faces[a]]
-                    local frame = Instance.new("Frame", surface)
-                    frame.Size = UDim2.new(1, 0, 1, 0)
-                    frame.BorderSizePixel = 0
-                    frame.BackgroundTransparency = 0.5
-                    frame.BackgroundColor3 = Color3.new(1, 1, 1)
-                end
-            end
-        end
-    else
-        text2.Text = "No A120"
-        text2.BackgroundColor3 = Color3.new(1, 1, 1)
-    end
-end

@@ -262,7 +262,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 	Title = " ";
 
-	Text = "Rechedmcvn";
+	Text = "Security Enable";
 
 	Icon = "rbxthumb://type=Asset&id=11935868660&w=150&h=150"})
 
@@ -270,23 +270,13 @@ Duration = 15;
 
 game:GetService("StarterGui"):SetCore("SendNotification", { 
 
-	Title = "GUI OPEN";
+	Title = "";
 
-	Text = "Gui Fly ︎︎✅";
+	Text = "100% Anti Ban";
 
 	Icon = "rbxthumb://type=Asset&id=11935883214&w=150&h=150"})
 
 Duration = 10;
-
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-
-	Title = " ";
-
-	Text = "Rechedmcvn";
-
-	Icon = "rbxthumb://type=Asset&id=11935866652&w=150&h=150"})
-
-Duration = 30;
 
 Frame.Active = true -- main = gui
 

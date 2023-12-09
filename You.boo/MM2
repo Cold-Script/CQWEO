@@ -64,7 +64,7 @@ local L_19_ = L_15_:CreateWindow({
 	"",
 	SubTitle = "",
 	TabWidth = 160,
-	Size = UDim2.fromOffset(450, 150),
+	Size = UDim2.fromOffset(550, 500),
 	Acrylic = true,
 	Theme = "Dark",
 })

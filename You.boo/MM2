@@ -304,60 +304,6 @@ spawn(function()
 	end
 end)  
 
-local L_24_ = L_20_.Main:AddToggle("GrabGun", {
-	Title = "Automatically Grab Gun",
-	Default = false,
-	Callback = function(L_100_arg1)
-		if L_100_arg1 then 
-			repeat
-				task.wait()
-				local L_101_, L_102_ = pcall(function() 
-
-					local L_103_ = L_3_.LocalPlayer
-					local L_104_ = L_103_.Character
-					local L_105_ = L_104_:FindFirstChild("HumanoidRootPart")
-
-					local L_106_ = GetMurderer()
-					local L_107_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
-					local L_108_ = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true
-
-					if L_107_ and L_108_ then
-						local L_109_ = workspace:FindFirstChild(L_106_)
-
-						if L_109_ then
-							local L_110_ = L_109_:WaitForChild("HumanoidRootPart")
-							print(L_110_.Position)
-							local L_111_ = L_107_.Position
-
-							local L_112_ = (L_110_.Position - L_111_).Magnitude
-							local L_113_ = game.Players.LocalPlayer
-
-							if L_112_ > 25 then
-
-								if game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Timer.Visible == false then 
-									local L_114_ = L_113_.Character.HumanoidRootPart.CFrame
-									wait(.5)
-									L_113_.Character.HumanoidRootPart.CFrame = L_107_.CFrame
-									L_113_.Character.Humanoid.Jump = true
-									wait(.3)
-									L_113_.Character.HumanoidRootPart.CFrame = L_114_
-								end  
-							end
-
-						end
-					end
-				end)
-
-				if not L_101_ then
-					warn("An error occurred:", L_102_) -- Print the error message
-				end
-
-			until not L_18_.GrabGun.Value or not L_8_.Connected
-
-		end
-	end
-})
-
 local L_25_ = L_20_.Main:AddToggle("GunCham", {
 	Title = "Gun Dropped Cham",
 	Default = false,
@@ -431,7 +377,7 @@ local L_27_ = L_20_.Misc:AddSlider("Distance", {
 })
 
 local L_28_ = L_20_.Misc:AddToggle("SilentAim", {
-	Title = "Silent Aim",
+	Title = "Auto Silent Aim",
 	Default = false,
 	Callback = function(L_130_arg1)
 	end
@@ -448,7 +394,7 @@ local L_29_ = L_20_.Misc:AddSlider("Slider", {
 })  
 
 local L_30_ = L_20_.Misc:AddToggle("KillMurder", {
-	Title = "Kill Murder",
+	Title = "Auto Kill Murder",
 	Default = false,
 	Callback = function(L_132_arg1)
 		if L_132_arg1 then

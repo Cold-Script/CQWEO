@@ -1,23 +1,140 @@
-v0:Notify("You Hub Loading");
-wait(1)
-v0:Notify("You Hub Ready!")
-wait(1.5)
-local v0=loadstring(game:HttpGet("https://raw.githubusercontent.com/CQWEO/GuiCQWEO/patch-8/Gui Lib %5BLibrary%5D"))();local v1=loadstring(game:HttpGet("https://raw.githubusercontent.com/CQWEO/COLORS/main/README.md"))();local v2=loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/Gui/main/Gui%20Lib%20%5BSaveManager%5D"))();local v3=loadstring(game:HttpGet("https://raw.githubusercontent.com/CQWEO/BlackKing-1/main/Blackking%20%5BGuiNew!%5D"))();local v4=Instance.new("Sound");v4.Parent=game.SoundService;v4.SoundId="rbxassetid://4590657391";v4.Volume=5;v4.PlayOnRemove=true;v4:Destroy();v3:Introduction();wait(1999 -(1805 + 193) );local v44=v0:CreateWindow({Title="YOU HUB
-| EVADE" ,Center=true,AutoShow=true,TabPadding=5,MenuFadeTime=0.2 + 0 });local v45={Main=v44:AddTab("Main")};v46=v45.Main:AddLeftGroupbox("");getgenv().money = true
-getgenv().revivedie = true
-getgenv().autowistle = true
-getgenv().autochat = true
-getgenv().AutoDrink = true
-getgenv().NoCameraShake = true
+local WorkspacePlayers = game:GetService("Workspace").Game.Players;
+local Players = game:GetService('Players');
+local localplayer = Players.LocalPlayer;
+-- semicolon but cool :sunglasses:
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/9Strew/roblox/main/proc/jans"))()
+local Esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/9Strew/roblox/main/proc/kiriotesp"))()
+Esp.Enabled = false
+Esp.Tracers = false
+Esp.Boxes = false
+
+local Window = Library:CreateWindow("You Hub", Vector2.new(500, 1000), Enum.KeyCode.RightShift)
+local Evade = Window:CreateTab("General")
+local AutoFarms = Window:CreateTab("Farms")
+local Gamee = Window:CreateTab("Game")
+local Configs = Window:CreateTab("Settings")
+
+local EvadeSector = Evade:CreateSector("Character", "left")
+local Visuals = Evade:CreateSector("Visuals", "right")
+local Farms = AutoFarms:CreateSector("Farms", "left")
+local FarmStats = AutoFarms:CreateSector("Stats", "right")
+
+local Gamesec = Gamee:CreateSector("Utils", "right")
+local World = Gamee:CreateSector("World", "left")
+
 getgenv().Settings = {
     moneyfarm = false,
     afkfarm = false,
     NoCameraShake = false,
+    Downedplayeresp = false,
+    AutoRespawn = false,
+    TicketFarm = false,
     Speed = 1450,
     Jump = 3,
     reviveTime = 3,
+
+    stats = {
+        TicketFarm = {
+            earned = nil,
+            duration = 0
+        },
+
+        TokenFarm = {
+            earned = nil,
+            duration = 0
+        }
+
+    }
 }
- 
+
+
+local WalkSpeed = EvadeSector:AddSlider("Speed", 1450, 1450, 12000, 100, function(Value)
+    Settings.Speed = Value
+end)
+
+
+local JumpPower = EvadeSector:AddSlider("JumpPower", 3, 3, 20, 1, function(Value)
+    Settings.Jump = Value
+end)
+
+--// because silder does not detect dotted values 
+
+EvadeSector:AddToggle('FullBright', function(Value)
+if Value then
+   	Game.Lighting.Brightness = 4
+	Game.Lighting.FogEnd = 100000
+	Game.Lighting.GlobalShadows = false
+    Game.Lighting.ClockTime = 12
+else
+    Game.Lighting.Brightness = 0
+	Game.Lighting.FogEnd = 100
+	Game.Lighting.GlobalShadows = true
+    Game.Lighting.ClockTime = 12
+end)
+
+EvadeSector:AddToggle('No Camera Shake', false, function(State)
+    Settings.NoCameraShake = State
+end)
+
+EvadeSector:AddToggle('Fast Revive', false, function(State)
+    if State then
+        workspace.Game.Settings:SetAttribute("ReviveTime", 2.2)
+    else
+        workspace.Game.Settings:SetAttribute("ReviveTime", Settings.reviveTime)
+    end
+end)
+
+EvadeSector:AddToggle('Auto Respawn', false, function(State)
+    Settings.AutoRespawn = State
+end)
+
+
+EvadeSector:AddToggle('Money Farm', false, function(State)
+    Settings.moneyfarm = State
+end)
+
+EvadeSector:AddToggle('Afk Farm', false, function(State)
+    Settings.afkfarm = State
+end)
+
+Visuals:AddToggle('Enable Esp', false, function(State)
+    Esp.Enabled = State
+end)
+
+Visuals:AddToggle('Bot Esp', false, function(State)
+    Esp.NPCs = State
+end)
+
+Visuals:AddToggle('Ticket Esp', false, function(State)
+    Esp.TicketEsp = State
+end)
+
+Visuals:AddToggle('Downed Player Esp', false, function(State)
+    Settings.Downedplayeresp = State
+end)
+
+Visuals:AddToggle('Boxes', false, function(State)
+    Esp.Boxes = State
+end)
+
+Visuals:AddToggle('Tracers', false, function(State)
+    Esp.Tracers = State
+end)
+
+Visuals:AddToggle('Players', false, function(State)
+    Esp.Players = State
+end)
+
+Visuals:AddToggle('Distance', false, function(State)
+    Esp.Distance = State
+end)
+
+local TypeLabelC5 = FarmStats:AddLabel('Auto Farm Stats')
+local DurationLabelC5 = FarmStats:AddLabel('Duration: 0')
+local EarnedLabelC5 = FarmStats:AddLabel('Earned: 0')
+--local TicketsLabelC5 = FarmStats:AddLabel('Total Tickets:'..localplayer:GetAttribute('Tickets'))
+
 local FindAI = function()
     for _,v in pairs(WorkspacePlayers:GetChildren()) do
         if not Players:FindFirstChild(v.Name) then
@@ -25,7 +142,8 @@ local FindAI = function()
         end
     end
 end
- 
+
+
 local GetDownedPlr = function()
     for i,v in pairs(WorkspacePlayers:GetChildren()) do
         if v:GetAttribute("Downed") then
@@ -33,7 +151,8 @@ local GetDownedPlr = function()
         end
     end
 end
- 
+
+--Shitty Auto farm 🥶💀🤡💀🤡💀🤡
 local revive = function()
     local downedplr = GetDownedPlr()
     if downedplr ~= nil and downedplr:FindFirstChild('HumanoidRootPart') then
@@ -54,152 +173,45 @@ local revive = function()
         end)
     end
 end
- 
-task.spawn(function()
-    while task.wait() do
-        if Settings.AutoRespawn then
-             if localplayer.Character and localplayer.Character:GetAttribute("Downed") then
-                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
-             end
+
+--Kiriot
+Esp:AddObjectListener(WorkspacePlayers, {
+    Color =  Color3.fromRGB(255,0,0),
+    Type = "Model",
+    PrimaryPart = function(obj)
+        local hrp = obj:FindFirstChild('HRP')
+        while not hrp do
+            wait()
+            hrp = obj:FindFirstChild('HRP')
         end
- 
-        if Settings.NoCameraShake then
-            localplayer.PlayerScripts.CameraShake.Value = CFrame.new(0,0,0) * CFrame.new(0,0,0)
-        end
-        if Settings.moneyfarm then
-            if localplayer.Character and localplayer.Character:GetAttribute("Downed") then
-                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
-                task.wait(3)
-            else
-                revive()
-                task.wait(1)
-            end
-        end
-        if Settings.moneyfarm == false and Settings.afkfarm and localplayer.Character:FindFirstChild('HumanoidRootPart') ~= nil then
-            localplayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(6007, 7005, 8005)
-        end
-    end
-end)
- 
-function camerashake()
-    while NoCameraShake == true do task.wait()
-        localplayer.PlayerScripts.CameraShake.Value = CFrame.new(0,0,0) * CFrame.new(0,0,0)
-    end
-end
- 
-function autodrink()
-	while AutoDrink == true do
-		local ohString1 = "Cola"
-		game:GetService("ReplicatedStorage").Events.UseUsable:FireServer(ohString1)
-		wait(6)
-	end
-end
- 
-function SpamChat()
-    while autochat == true do
-        local ohString1 = "You Hub on top"
-        local ohString2 = "All"
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(ohString1, ohString2)
-        wait(1)
-    end
-end
- 
-function autowistlefunction()
-    while autowistle == true do
-        local ohString1 = "Whistle"
-        local ohBoolean2 = true
-        game:GetService("Players").LocalPlayer.PlayerScripts.Events.KeybindUsed:Fire(ohString1, ohBoolean2)
-        game:GetService("ReplicatedStorage").Events.Whistle:FireServer()
-        wait(5)
-    end
-end
- 
-function god()
-    while revivedie == true do
-        game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
-        wait()
-    end
-end
- 
-function dofullbright()
-    Light.Ambient = Color3.new(1, 1, 1)
-    Light.ColorShift_Bottom = Color3.new(1, 1, 1)
-    Light.ColorShift_Top = Color3.new(1, 1, 1)
-    game.Lighting.FogEnd = 100000
-    game.Lighting.FogStart = 0
-    game.Lighting.ClockTime = 14
-    game.Lighting.Brightness = 2
-    game.Lighting.GlobalShadows = false
-end
- 
-function freemoney()
-    while money == true do
-        local ohString1 = "Free money <font color=\"rgb(100,255,100)\">($99999)</font>"
-        game:GetService("Players").LocalPlayer.PlayerGui.HUD.Messages.Use:Fire(ohString1)
-        wait(5)
-    end
-end;wait(0.1)
-v0:Notify("Welcome to You Hub");v46:AddToggle("MyToggle"{Text="Auto Win",Default=false,function(Value)
-Settings.afkfarm = Value
-end});v46:AddSlider("MySlider"{Text="SpeedBoost",Default=0,Min=0,Max=500,Rounding=0,Compact=true,function(Value)
-Settings.afkfarm = Value
-end});v46:AddSlider("MySlider"{Text="Zoom Far Camera",Default=0,Min=0,Max=120,Rounding=0,Compact=true,function(Value)if Value then
-game:GetService("Workspace").Camera.FieldOfView= Value
-end});v46:AddSlider("MySlider"{Text="JumpPower",Default=0,Min=0,Max=120,Rounding=0,Compact=true,Increment=1,ValueName="Jump",function(Value)
-Settings.Jump = Value
-end});v46:AddSlider("MySlider"{Text="Day/Night",Default=0,Min=0,Max=120,Rounding=0,Compact=true,Increment=1,ValueName="Time",function(Value)
-Settings.Jump = Value
-end});v46:AddToggle("MyToggle"{Text="No Shake Camera",Default=false,function(Value)
-NoCameraShake = Value
-        camerashake()
-end});v46:AddToggle("MyToggle"{Text="Auto Drink Colla",Default=false,function(Value)
-AutoDrink = Value
-		autodrink()
-end});v46:AddToggle("MyToggle"{Text="Auto Spawn",Default=false,function(Value)
-Settings.AutoRespawn = Value
-end});v46=45.Main:AddRightGroupbox("");v46:AddToggle("MyToggle"{Text="Tracer Nextbots",Default=false,function(Value)
-getgenv().toggleespmpt = Value
-end});local cam = workspace.CurrentCamera
-local rs = game:GetService'RunService'
- 
-getgenv().toggleespmpt = true
-function esp(plr)
-   if game:GetService'Players':GetPlayerFromCharacter(plr) == nil then
-    local rat = Drawing.new("Line")
-        rs.RenderStepped:Connect(function()
-            if plr:FindFirstChild'HumanoidRootPart' then
-                local vector,screen = cam:WorldToViewportPoint(plr.HumanoidRootPart.Position)
-                if screen then
-                    rat.Visible = toggleespmpt
-                    rat.From = Vector2.new(cam.ViewportSize.X / 2,cam.ViewportSize.Y / 1)
-                    rat.To = Vector2.new(vector.X,vector.Y)
-                    rat.Color = getgenv().mptespcolour
-                    rat.Thickness = getgenv().mptespthickness
-                    else
-                        rat.Visible = false
-                end
-                else
-                    pcall(function()
-                    rat.Visible = false
-                    end)
-            end
-                if not plr:FindFirstChild'HumanoidRootPart' or not plr:FindFirstChild'HumanoidRootPart':IsDescendantOf(game:GetService'Workspace') then
-                    pcall(function()
-                    rat:Remove()
-                    end)
-            end
-        end)
+        return hrp
+    end,
+    Validator = function(obj)
+        return not game.Players:GetPlayerFromCharacter(obj)
+    end,
+    CustomName = function(obj)
+        return '[AI] '..obj.Name
+    end,
+    IsEnabled = "NPCs",
+})
+
+--[[Esp:AddObjectListener(game:GetService("Workspace").Game.Effects.Tickets, {
+    CustomName = "Ticket",
+    Color = Color3.fromRGB(41,180,255),
+    IsEnabled = "TicketEsp"
+})]]
+
+--Tysm CJStylesOrg
+Esp.Overrides.GetColor = function(char)
+   local GetPlrFromChar = Esp:GetPlrFromChar(char)
+   if GetPlrFromChar then
+       if Settings.Downedplayeresp and GetPlrFromChar.Character:GetAttribute("Downed") then
+           return Settings.DownedColor
+       end
    end
+   return Settings.PlayerColor
 end
- 
-for i,v in pairs(game:GetService'Workspace'.Game.Players:GetChildren()) do
-    esp(v)
-end
- 
-game:GetService'Workspace'.Game.Players.ChildAdded:Connect(function(plr)
-    esp(plr)
-end)
- 
+
 local old
 old = hookmetamethod(game,"__namecall",newcclosure(function(self,...)
     local Args = {...}
@@ -209,20 +221,132 @@ old = hookmetamethod(game,"__namecall",newcclosure(function(self,...)
     end
     return old(self,...)
 end))
- 
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
-            game.Players.LocalPlayer.Character:TranslateBy(game.Players.LocalPlayer.Character.Humanoid.MoveDirection * TargetWalkspeed/100)
+
+local formatNumber = (function(value) -- //Credits: https://devforum.roblox.com/t/formatting-a-currency-label-to-include-commas/413670/3
+	value = tostring(value)
+	return value:reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+end)
+
+function Format(Int) -- // Credits: https://devforum.roblox.com/t/converting-secs-to-hsec/146352
+	return string.format("%02i", Int)
+end
+
+function convertToHMS(Seconds)
+	local Minutes = (Seconds - Seconds%60)/60
+	Seconds = Seconds - Minutes*60
+	local Hours = (Minutes - Minutes%60)/60
+	Minutes = Minutes - Hours*60
+	return Format(Hours).."H "..Format(Minutes).."M "..Format(Seconds)..'S'
+end
+
+task.spawn(function()
+    while task.wait(1) do
+        --if Settings.TicketFarm then
+        --    Settings.stats.TicketFarm.duration += 1
+        --end
+        if Settings.moneyfarm then
+            Settings.stats.TokenFarm.duration += 1
+        end 
+    end
+end)
+
+--local gettickets = localplayer:GetAttribute('Tickets')
+local GetTokens = localplayer:GetAttribute('Tokens')
+
+localplayer:GetAttributeChangedSignal('Tickets'):Connect(function()
+    --local tickets = tostring(gettickets - localplayer:GetAttribute('Tickets'))
+    --local cleanvalue = string.split(tickets, "-")
+    Settings.stats.TicketFarm.earned = cleanvalue[2]
+end)
+
+localplayer:GetAttributeChangedSignal('Tokens'):Connect(function()
+    local tokens = tostring(GetTokens - localplayer:GetAttribute('Tokens'))
+    local cleanvalue = string.split(tokens, "-")
+    print(cleanvalue[2])
+    Settings.stats.TokenFarm.earned = cleanvalue[2]
+end)
+
+localplayer:GetAttributeChangedSignal('Tokens'):Connect(function()
+    local tokens = tostring(GetTokens - localplayer:GetAttribute('Tokens'))
+    local cleanvalue = string.split(tokens, "-")
+    print(cleanvalue[2])
+    Settings.stats.TokenFarm.earned = cleanvalue[2]
+end)
+
+task.spawn(function()
+    while task.wait() do
+        if Settings.TicketFarm then
+            TypeLabelC5:Set('Ticket Farm')
+            DurationLabelC5:Set('Duration:'..convertToHMS(Settings.stats.TicketFarm.duration))
+            EarnedLabelC5:Set('Earned:'.. formatNumber(Settings.stats.TicketFarm.earned))
+            --TicketsLabelC5:Set('Total Tickets: '..localplayer:GetAttribute('Tickets'))
+
+            if game.Players.LocalPlayer:GetAttribute('InMenu') ~= true and localplayer:GetAttribute('Dead') ~= true then
+                for i,v in pairs(game:GetService("Workspace").Game.Effects.Tickets:GetChildren()) do
+                    localplayer.Character.HumanoidRootPart.CFrame = CFrame.new(v:WaitForChild('HumanoidRootPart').Position)
+                end
+            else
+                task.wait(2)
+                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+            end
+            if localplayer.Character and localplayer.Character:GetAttribute("Downed") then
+                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+                task.wait(2)
+            end
         end
-    end)
-end);v46:AddButton({Text="Fullbright",Default=false,function()
-dofullbright()
-end})v46:AddButton({Text="Inf Jump",Default=false,function()
-local InfiniteJumpEnabled = true
-        game:GetService("UserInputService").JumpRequest:connect(function()
-            if InfiniteJumpEnabled then
-                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping"))
-end});v46:AddSlider("MySlider"{Text="Hip Height",Default=0,Min=0,Max=100,Rounding=0,Compact=true,ValueName="Hip Height",function(HipValue)
-        game.Players.LocalPlayer.Character.Humanoid.HipHeight = HipValue
-end});
+    end
+end)
+
+
+task.spawn(function()
+    while task.wait() do
+        if Settings.AutoRespawn then
+             if localplayer.Character and localplayer.Character:GetAttribute("Downed") then
+                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+             end
+        end
+
+        if Settings.NoCameraShake then
+            localplayer.PlayerScripts.CameraShake.Value = CFrame.new(0,0,0) * CFrame.new(0,0,0)
+        end
+        if Settings.moneyfarm then
+            TypeLabelC5:Set('Money Farm')
+            DurationLabelC5:Set('Duration:'..convertToHMS(Settings.stats.TokenFarm.duration))
+            EarnedLabelC5:Set('Earned:'.. formatNumber(Settings.stats.TokenFarm.earned))
+            --TicketsLabelC5:Set('Total Tokens: '..formatNumber(localplayer:GetAttribute('Tokens')))
+            
+            if localplayer:GetAttribute("InMenu") and localplayer:GetAttribute("Dead") ~= true then
+                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+            end
+            if localplayer.Character and localplayer.Character:GetAttribute("Downed") then
+                game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+                task.wait(3)
+            else
+                revive()
+                task.wait(1)
+            end
+
+        end
+        if Settings.moneyfarm == false and Settings.afkfarm and localplayer.Character:FindFirstChild('HumanoidRootPart') ~= nil then
+            localplayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(6007, 7005, 8005)
+        end
+    end
+end)
+
+--Infinite yield's Anti afk
+local GC = getconnections or get_signal_cons
+	if GC then
+		for i,v in pairs(GC(localplayer.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
+	else
+		localplayer.Idled:Connect(function()
+			local VirtualUser = game:GetService("VirtualUser")
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
+	end

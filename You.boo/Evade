@@ -187,6 +187,12 @@ local MiscTab= Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
+local SliderTab= Window:MakeTab({
+	Name = "Slider",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
  
 local MiscTab3 = MainTab:AddSection({
 	Name = ""
@@ -198,74 +204,6 @@ MainTab:AddToggle({
 	Callback = function(Value)
         Settings.afkfarm = Value
 	end    
-})
- 
-local TargetWalkspeed
-MainTab:AddSlider({
-	Name = "Speed",
-	Min = 0,
-	Max = 250,
-	Default = 0,
-	Color = Color3.fromRGB(128, 128, 128),
-	Increment = 1,
-	ValueName = "Walk Speed",
-	Callback = function(Value)
-		TargetWalkspeed = Value
-	end   
-})
- 
-MainTab:AddSlider({
-    Name = "Hip height",
-    Min = -1.40,
-    Max = 100,
-    Default = 0,
-    Color = Color3.fromRGB(128, 128, 128),
-    Increment = 1,
-	ValueName = "Hip Height",
-    Callback = function(HipValue)
-        game.Players.LocalPlayer.Character.Humanoid.HipHeight = HipValue
-    end    
-})
- 
-MainTab:AddSlider({
-	Name = "Fov Slider",
-	Min = 1,
-	Max = 120,
-	Default = 120,
-	Color = Color3.fromRGB(128, 128, 128),
-	Increment = 1,
-	ValueName = "Fov",
-	Callback = function(Fov)
-        local ohString1 = "FieldOfView"
-        local ohNumber2 = Fov
-        game:GetService("ReplicatedStorage").Events.UpdateSetting:FireServer(ohString1, ohNumber2)
-    end
-})
- 
-MainTab:AddSlider({
-	Name = "Jump Power",
-	Min = 0,
-	Max = 120,
-	Default = 50,
-	Color = Color3.fromRGB(128, 128, 128),
-	Increment = 1,
-	ValueName = "Jump",
-	Callback = function(Value)
-		Settings.Jump = Value
-    end
-})
- 
-MainTab:AddSlider({
-	Name = "Day & Night Slider",
-	Min = 0,
-	Max = 24,
-	Default = 11,
-	Color = Color3.fromRGB(128, 128, 128),
-	Increment = 0.1,
-	ValueName = "Time",
-	Callback = function(Time)
-        game.Lighting.ClockTime = Time
-    end
 })
  
 MainTab:AddToggle({
@@ -293,183 +231,75 @@ MainTab:AddToggle({
         Settings.AutoRespawn = Value
 	end  
 })
- 
-MainTab:AddButton({
-	Name = "Player Esp",
-	Callback = function()
-		local c = workspace.CurrentCamera
-		local ps = game:GetService("Players")
-		local lp = ps.LocalPlayer
-		local rs = game:GetService("RunService")
-		local function getdistancefc(part)
-			return (part.Position - c.CFrame.Position).Magnitude
-		end
-		local function esp(p, cr)
-			local h = cr:WaitForChild("Humanoid")
-			local hrp = cr:WaitForChild("HumanoidRootPart")
-			local text = Drawing.new("Text")
-			text.Visible = false
-			text.Center = true
-			text.Outline = true
-			text.Font = 2
-			text.Color = Color3.fromRGB(255, 255, 255)
-			text.Size = 17
-			local c1
-			local c2
-			local c3
-			local function dc()
-				text.Visible = false
-				text:Remove()
-				if c1 then
-					c1:Disconnect()
-					c1 = nil
-				end
-				if c2 then
-					c2:Disconnect()
-					c2 = nil
-				end
-				if c3 then
-					c3:Disconnect()
-					c3 = nil
-				end
-			end
-			c2 =
-				cr.AncestryChanged:Connect(
-				function(_, parent)
-					if not parent then
-						dc()
-					end
-				end
-			)
-			c3 =
-				h.HealthChanged:Connect(
-				function(v)
-					if (v <= 0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
-						dc()
-					end
-				end
-			)
-			c1 =
-				rs.RenderStepped:Connect(
-				function()
-					local hrp_pos, hrp_os = c:WorldToViewportPoint(hrp.Position)
-					if hrp_os then
-						text.Position = Vector2.new(hrp_pos.X, hrp_pos.Y)
-						text.Text = p.Name .. " (" .. tostring(math.floor(getdistancefc(hrp))) .. " m)"
-						text.Visible = true
-					else
-						text.Visible = false
-					end
-				end
-			)
-		end
-		local function p_added(p)
-			if p.Character then
-				esp(p, p.Character)
-			end
-			p.CharacterAdded:Connect(
-				function(cr)
-					esp(p, cr)
-				end
-			)
-		end
-		for i, p in next, ps:GetPlayers() do
-			if p ~= lp then
-				p_added(p)
-			end
-		end
-		ps.PlayerAdded:Connect(p_added)
-        OrionLib:MakeNotification({
-			Name = "You Hub",
-			Content = "Pressed on the Player Esp Button",
-			Image = "rbxassetid://4483345998",
-			Time = 2
-		}) 
-  	end    
+
+local TargetWalkspeed
+SliderTab:AddSlider({
+	Name = "Speed",
+	Min = 0,
+	Max = 250,
+	Default = 250,
+	Color = Color3.fromRGB(128, 128, 128),
+	Increment = 1,
+	ValueName = "Walk Speed",
+	Callback = function(Value)
+		TargetWalkspeed = Value
+	end   
 })
  
-MainTab:AddButton({
-	Name = "Inf Jump",
-	Callback = function()
-        local InfiniteJumpEnabled = true
-        game:GetService("UserInputService").JumpRequest:connect(function()
-            if InfiniteJumpEnabled then
-                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-            end
-        end)
-        OrionLib:MakeNotification({
-			Name = "You Hub",
-			Content = "Pressed on the Inf Jump Button",
-			Image = "rbxassetid://4483345998",
-			Time = 2
-		}) 
-  	end    
+SliderTab:AddSlider({
+    Name = "Hip height",
+    Min = -1.40,
+    Max = 100,
+    Default = 100,
+    Color = Color3.fromRGB(128, 128, 128),
+    Increment = 1,
+	ValueName = "Hip Height",
+    Callback = function(HipValue)
+        game.Players.LocalPlayer.Character.Humanoid.HipHeight = HipValue
+    end    
 })
  
-MainTab:AddButton({
-	Name = "G to Teleport",
-	Callback = function()
-        plr = game.Players.LocalPlayer 
-        hum = plr.Character.HumanoidRootPart 
-        mouse = plr:GetMouse()
-        mouse.KeyDown:connect(function(key)
-            if key == "g" then
-            if mouse.Target then
-                hum.CFrame = CFrame.new(mouse.Hit.x, mouse.Hit.y + 5, mouse.Hit.z)
-                end
-            end
-        end)
-        OrionLib:MakeNotification({
-			Name = "You Hub",
-			Content = "Pressed on the T To Teleport Button",
-			Image = "rbxassetid://4483345998",
-			Time = 2
-		}) 
-  	end    
+SliderTab:AddSlider({
+	Name = "Fov Slider",
+	Min = 1,
+	Max = 120,
+	Default = 120,
+	Color = Color3.fromRGB(128, 128, 128),
+	Increment = 1,
+	ValueName = "Fov",
+	Callback = function(Fov)
+        local ohString1 = "FieldOfView"
+        local ohNumber2 = Fov
+        game:GetService("ReplicatedStorage").Events.UpdateSetting:FireServer(ohString1, ohNumber2)
+    end
 })
  
-MainTab:AddButton({
-	Name = "FullBright",
-	Callback = function()
-        dofullbright()
-        OrionLib:MakeNotification({
-			Name = "You Hub",
-			Content = "Pressed on the Full Bright Button",
-			Image = "rbxassetid://4483345998",
-			Time = 2
-		}) 
-  	end    
+SliderTab:AddSlider({
+	Name = "Jump Power",
+	Min = 0,
+	Max = 120,
+	Default = 75,
+	Color = Color3.fromRGB(128, 128, 128),
+	Increment = 1,
+	ValueName = "Jump",
+	Callback = function(Value)
+		Settings.Jump = Value
+    end
 })
  
-MainTab:AddButton({
-	Name = "Return Too Main Menu",
-	Callback = function()
-        game:GetService("ReplicatedStorage").Events.ReturnToMenu:FireServer()
-  	end    
+SliderTab:AddSlider({
+	Name = "Day & Night Slider",
+	Min = 0,
+	Max = 24,
+	Default = 11,
+	Color = Color3.fromRGB(128, 128, 128),
+	Increment = 0.1,
+	ValueName = "Time",
+	Callback = function(Time)
+        game.Lighting.ClockTime = Time
+    end
 })
- 
-MainTab:AddButton({
-	Name = "Low Quality",
-	Callback = function()
-        local ohString1 = "LowQuality"
-        local ohBoolean2 = true
-        game:GetService("ReplicatedStorage").Events.UpdateSetting:FireServer(ohString1, ohBoolean2)
-        OrionLib:MakeNotification({
-			Name = "You Hub",
-			Content = "Pressed on the Low Quality Button",
-			Image = "rbxassetid://4483345998",
-			Time = 2
-		}) 
-  	end    
-})
- 
-MainTab:AddButton({
-	Name = "Test Emote (Permanant)",
-	Callback = function()
-        game:GetService("ReplicatedStorage").Events.UI.Purchase:InvokeServer("Emotes", "Test")
-  	end    
-})
- 
+
 MiscTab:AddBind({
 	Name = "Drink Cola",
 	Default = Enum.KeyCode.H,

@@ -225,11 +225,68 @@ MainTab:AddToggle({
 })
  
 MainTab:AddToggle({
-	Name = "Auto respawn",
+	Name = "Auto Respawn",
 	Default = false,
 	Callback = function(Value)
         Settings.AutoRespawn = Value
 	end  
+})
+
+MainTab:AddButton({
+	Name = "Inf Jump",
+	Callback = function()
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if InfiniteJumpEnabled then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+            end
+        end)
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Inf Jump Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
+})
+ 
+MainTab:AddButton({
+	Name = "FullBright",
+	Callback = function()
+        dofullbright()
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Full Bright Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
+})
+MainTab:AddButton({
+	Name = "Fast Revive",
+	Callback = function()
+workspace.Game.Settings:SetAttribute("ReviveTime", 0.1)
+end})
+MainTab:AddButton({
+	Name = "Return Too Main Menu",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Events.ReturnToMenu:FireServer()
+  	end    
+})
+ 
+MainTab:AddButton({
+	Name = "Low Quality",
+	Callback = function()
+        local ohString1 = "LowQuality"
+        local ohBoolean2 = true
+        game:GetService("ReplicatedStorage").Events.UpdateSetting:FireServer(ohString1, ohBoolean2)
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Low Quality Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
 })
 
 local TargetWalkspeed

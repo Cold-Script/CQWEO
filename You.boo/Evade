@@ -18,7 +18,7 @@ OrionLib:MakeNotification({
     Image = "rbxassetid://4483345998",
     Time = 2
 })
-local Window = OrionLib:MakeWindow({Name = "You Hub |Evade|", HidePremium = false,IntroText = "Evade v1.5", SaveConfig = false, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "You Hub", HidePremium = false,IntroText = "Evade v1.5", SaveConfig = false, ConfigFolder = "OrionTest"})
  
 --functions and shit
 getgenv().money = true
@@ -231,6 +231,66 @@ MainTab:AddToggle({
         Settings.AutoRespawn = Value
 	end  
 })
+
+MainTab:AddButton({
+	Name = "Inf Jump",
+	Callback = function()
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if InfiniteJumpEnabled then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+            end
+        end)
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Inf Jump Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
+})
+ 
+MainTab:AddButton({
+	Name = "FullBright",
+	Callback = function()
+        dofullbright()
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Full Bright Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
+})
+ 
+MainTab:AddButton({
+	Name = "Fast Revive",
+	Callback = function()
+workspace.Game.Settings:SetAttribute("ReviveTime", 2.2)
+end})
+
+MainTab:AddButton({
+	Name = "Return Too Main Menu",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Events.ReturnToMenu:FireServer()
+  	end    
+})
+ 
+MainTab:AddButton({
+	Name = "Low Quality",
+	Callback = function()
+        local ohString1 = "LowQuality"
+        local ohBoolean2 = true
+        game:GetService("ReplicatedStorage").Events.UpdateSetting:FireServer(ohString1, ohBoolean2)
+        OrionLib:MakeNotification({
+			Name = "You Hub",
+			Content = "Pressed on the Low Quality Button",
+			Image = "rbxassetid://4483345998",
+			Time = 2
+		}) 
+  	end    
+})
+
 
 local TargetWalkspeed
 SliderTab:AddSlider({

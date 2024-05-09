@@ -262,7 +262,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 	Title = " ";
 
-	Text = "Security Enable";
+	Text = "By VietNam 🇻🇳";
 
 	Icon = "rbxthumb://type=Asset&id=11935868660&w=150&h=150"})
 
@@ -272,11 +272,11 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 	Title = "";
 
-	Text = "100% Anti Ban";
+	Text = "Loading...";
 
 	Icon = "rbxthumb://type=Asset&id=11935883214&w=150&h=150"})
 
-Duration = 10;
+Duration = 2;
 
 Frame.Active = true -- main = gui
 

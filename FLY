@@ -70,7 +70,7 @@ up.Font = Enum.Font.GothamBold
 
 up.Text = "↑"
 
-up.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
+up.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 up.TextSize = 15.000
 
@@ -88,7 +88,7 @@ down.Font = Enum.Font.GothamBold
 
 down.Text = "↓"
 
-down.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
+down.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 down.TextSize = 15.000
 
@@ -108,7 +108,7 @@ onof.Font = Enum.Font.GothamBold
 
 onof.Text = "FLY"
 
-onof.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
+onof.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 onof.TextSize = 14.700
 
@@ -122,9 +122,9 @@ TextLabel.Size = UDim2.new(0, 100, 0, 28)
 
 TextLabel.Font = Enum.Font.GothamBold
 
-TextLabel.Text = "Void Fly"
+TextLabel.Text = "YOUHUB"
 
-TextLabel.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
+TextLabel.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 TextLabel.TextScaled = true
 
@@ -146,7 +146,7 @@ plus.Font = Enum.Font.GothamBold
 
 plus.Text = "+"
 
-plus.TextColor3 = Color3.fromRGB(0, 255, 0)
+plus.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 plus.TextScaled = true
 
@@ -168,7 +168,7 @@ speed.Font = Enum.Font.GothamBold
 
 speed.Text = "1"
 
-speed.TextColor3 = Color3.fromRGB(255, 255, 0)
+speed.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 speed.TextScaled = true
 
@@ -190,7 +190,7 @@ mine.Font = Enum.Font.GothamBold
 
 mine.Text = "—"
 
-mine.TextColor3 = Color3.fromRGB(255, 0, 0)
+mine.TextColor3 = Color3.fromHSV(0, 255, 4/256, .5, .8)
 
 mine.TextScaled = true
 

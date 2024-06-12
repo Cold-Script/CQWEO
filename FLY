@@ -66,13 +66,13 @@ up.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 
 up.Size = UDim2.new(0, 44, 0, 28)
 
-up.Font = Enum.Font.SourceSans
+up.Font = Enum.Font.GothamBold
 
 up.Text = "↑"
 
 up.TextColor3 = Color3.fromRGB(0, 255, 0)
 
-up.TextSize = 17.000
+up.TextSize = 13.000
 
 down.Name = "down"
 
@@ -84,13 +84,13 @@ down.Position = UDim2.new(0, 0, 0.491228074, 0)
 
 down.Size = UDim2.new(0, 44, 0, 28)
 
-down.Font = Enum.Font.SourceSans
+down.Font = Enum.Font.GothamBold
 
 down.Text = "↓"
 
 down.TextColor3 = Color3.fromRGB(255, 0, 0)
 
-down.TextSize = 17.000
+down.TextSize = 13.000
 
 onof.Name = "onof"
 
@@ -104,7 +104,7 @@ onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
 
 onof.Size = UDim2.new(0, 55.4, 0, 28)
 
-onof.Font = Enum.Font.SourceSans
+onof.Font = Enum.Font.GothamBold
 
 onof.Text = "FLY"
 
@@ -120,7 +120,7 @@ TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
 
 TextLabel.Size = UDim2.new(0, 100, 0, 28)
 
-TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Font = Enum.Font.GothamBold
 
 TextLabel.Text = " "
 
@@ -142,7 +142,7 @@ plus.Position = UDim2.new(0.231578946, 0, 0, 0)
 
 plus.Size = UDim2.new(0, 45, 0, 28)
 
-plus.Font = Enum.Font.SourceSans
+plus.Font = Enum.Font.GothamBold
 
 plus.Text = "+"
 
@@ -164,7 +164,7 @@ speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
 
 speed.Size = UDim2.new(0, 44, 0, 28)
 
-speed.Font = Enum.Font.SourceSans
+speed.Font = Enum.Font.GothamBold
 
 speed.Text = "1"
 
@@ -186,7 +186,7 @@ mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
 
 mine.Size = UDim2.new(0, 44, 0, 28)
 
-mine.Font = Enum.Font.SourceSans
+mine.Font = Enum.Font.GothamBold
 
 mine.Text = "—"
 
@@ -204,13 +204,13 @@ closebutton.Parent = main.Frame
 
 closebutton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 
-closebutton.Font = "SourceSans"
+closebutton.Font = "GothamBold"
 
 closebutton.Size = UDim2.new(0, 45, 0, 28)
 
 closebutton.Text = "X"
 
-closebutton.TextSize = 30
+closebutton.TextSize = 40
 
 closebutton.Position =  UDim2.new(0, 0, -1, 27)
 
@@ -220,7 +220,7 @@ mini.Parent = main.Frame
 
 mini.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 
-mini.Font = "SourceSans"
+mini.Font = "GothamBold"
 
 mini.Size = UDim2.new(0, 45, 0, 28)
 
@@ -236,7 +236,7 @@ mini2.Parent = main.Frame
 
 mini2.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 
-mini2.Font = "SourceSans"
+mini2.Font = "GothamBold"
 
 mini2.Size = UDim2.new(0, 45, 0, 28)
 

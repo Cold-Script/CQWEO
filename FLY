@@ -70,9 +70,9 @@ up.Font = Enum.Font.GothamBold
 
 up.Text = "↑"
 
-up.TextColor3 = Color3.fromRGB(0, 255, 0)
+up.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
 
-up.TextSize = 13.000
+up.TextSize = 15.000
 
 down.Name = "down"
 
@@ -88,9 +88,9 @@ down.Font = Enum.Font.GothamBold
 
 down.Text = "↓"
 
-down.TextColor3 = Color3.fromRGB(255, 0, 0)
+down.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
 
-down.TextSize = 13.000
+down.TextSize = 15.000
 
 onof.Name = "onof"
 
@@ -108,7 +108,7 @@ onof.Font = Enum.Font.GothamBold
 
 onof.Text = "FLY"
 
-onof.TextColor3 = Color3.fromRGB(0, 255, 255)
+onof.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
 
 onof.TextSize = 14.700
 
@@ -122,13 +122,13 @@ TextLabel.Size = UDim2.new(0, 100, 0, 28)
 
 TextLabel.Font = Enum.Font.GothamBold
 
-TextLabel.Text = " "
+TextLabel.Text = "Void Fly"
 
-TextLabel.TextColor3 = Color3.new(0, 255, 0) 
+TextLabel.TextColor3 = Color3.fromHSV(tick() % 5/5,1,1)
 
 TextLabel.TextScaled = true
 
-TextLabel.TextSize = 13.250
+TextLabel.TextSize = 14.250
 
 TextLabel.TextWrapped = true
 
@@ -150,7 +150,7 @@ plus.TextColor3 = Color3.fromRGB(0, 255, 0)
 
 plus.TextScaled = true
 
-plus.TextSize = 14.000
+plus.TextSize = 15.000
 
 plus.TextWrapped = true
 
@@ -172,7 +172,7 @@ speed.TextColor3 = Color3.fromRGB(255, 255, 0)
 
 speed.TextScaled = true
 
-speed.TextSize = 14.000
+speed.TextSize = 15.000
 
 speed.TextWrapped = true
 
@@ -194,7 +194,7 @@ mine.TextColor3 = Color3.fromRGB(255, 0, 0)
 
 mine.TextScaled = true
 
-mine.TextSize = 14.000
+mine.TextSize = 15.000
 
 mine.TextWrapped = true
 
@@ -208,7 +208,7 @@ closebutton.Font = "GothamBold"
 
 closebutton.Size = UDim2.new(0, 45, 0, 28)
 
-closebutton.Text = "X"
+closebutton.Text = "×"
 
 closebutton.TextSize = 40
 
@@ -262,7 +262,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 	Title = " ";
 
-	Text = "By VietNam 🇻🇳";
+	Text = "Fly By Việt Nam 🇻🇳";
 
 	Icon = "rbxthumb://type=Asset&id=11935868660&w=150&h=150"})
 
@@ -272,7 +272,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 	Title = "";
 
-	Text = "Loading...";
+	Text = "Loaded!!";
 
 	Icon = "rbxthumb://type=Asset&id=11935883214&w=150&h=150"})
 
